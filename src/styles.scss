@@ -1,0 +1,424 @@
+/* You can add global styles to this file, and also import other style files */
+
+// @import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700');
+$primary_color: #FF8800;
+$primary_black: rgba(0, 0, 0, 0.7);
+$grey:#777;
+body {
+    background: rgba(244, 244, 244, 1) url("assets/bg.png");
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    color: lighten(#373a3c, 5);
+    line-height: 22px;
+    letter-spacing: .4px;
+}
+
+a,
+.btn-link {
+    color: $primary_black;
+    outline: none;
+    &:focus,
+    &:hover {
+        color: rgba(255, 136, 0, 0.6);
+        text-decoration: none;
+    }
+}
+
+.float-right {
+    float: right;
+}
+
+#form-page {
+    padding-top: 7em;
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+}
+
+.form-control {
+    &:focus {
+        border-color: rgba(255, 136, 0, 0.3);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 136, 0, 0.2);
+    }
+}
+
+.form-page {
+    padding-top: 7em;
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.form-wrapper {
+    background: #fff;
+    padding: 2em 2em;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.09);
+    padding-bottom: 30px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    h2 {
+        font-size: 1.5em;
+        margin-bottom: 1.5em;
+    }
+}
+
+input::placeholder {
+    color: gray;
+    font-size: 80%;
+    text-align: center;
+}
+
+input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: gray;
+    font-size: 80%;
+    text-align: center;
+}
+
+input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: gray;
+    font-size: 80%;
+    text-align: center;
+}
+
+input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: gray;
+    font-size: 80%;
+    text-align: center;
+}
+
+input:-moz-placeholder {
+    /* Firefox 18- */
+    color: gray;
+    font-size: 80%;
+    text-align: center;
+}
+
+.help-message {
+    font-size: 80%;
+    opacity: 0.8;
+    padding: 0 1em;
+    font-style: italic;
+}
+
+label {
+    font-weight: normal;
+    margin-bottom: .5rem;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+.navbar-default {
+    border: none;
+}
+
+.btn-adsxpo {
+    background-color: $primary_black;
+    color: #fff;
+    &:hover {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+.modal-header {
+    background-color: $primary_color;
+    color: #fff;
+}
+
+.card {
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+    padding: 1em;
+    position: relative;
+    display: block;
+    margin-bottom: 2em;
+    background-color: #fff;
+    border-radius: .25rem; //border: 1px solid rgba(0,0,0,.125);
+    .card-title {
+        margin-bottom: 1.5em;
+        h5 {
+            font-size: 1.1em;
+            border-bottom: 1px solid gainsboro;
+            padding-bottom: .5em;
+        }
+        span {
+            color: rgba(0, 0, 0, 0.5);
+            font-size: .9em;
+        }
+        .step-description {
+            display: inline-block;
+            font-size: .8em;
+            margin-left: 2em;
+            color: $primary_color;
+        }
+    }
+    .card-action-buttons {
+        border-top: 1px solid #ccc;
+        margin-top: 1em;
+        padding: .5em;
+        text-align: right;
+    }
+}
+
+.smaller-label {
+    font-size: .7em;
+    font-weight: bold;
+}
+
+.layout-btns {
+    font-size: .9em;
+    .layout-btn {
+        margin-bottom: .8em;
+    }
+    label {
+        font-weight: bold;
+    }
+}
+
+.help-text {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: .9em;
+}
+
+.s-side-bar {
+    position: relative;
+    .side-bar-preview {
+        position: fixed;
+        width: 400px;
+    }
+}
+
+.upload-button[_ngcontent-wju-0] {
+    text-transform: capitalize;
+}
+
+.error-message {
+    color: rgba(255, 0, 0, 0.7);
+    padding: 0em 1em;
+    margin-top: 5px;
+    background-color: #ffe6e2;
+    font-size: 12px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.img-responsive {
+    max-width: 100%;
+}
+
+.btn-custom {
+    background-color: $primary_black;
+    color: #fff;
+    border-radius: 1px;
+    font-weight: normal;
+    font-size: 14px;
+    padding: .3em 1.5em;
+    display: inline-block;
+    margin-right: 1em;
+    &:hover {
+        color: #fff;
+        background-color: #000;
+    }
+}
+
+@mixin btn-success-mixin($color) {
+    color: #FFFFFF;
+    background-color: $color;
+    border: 1px solid $color;
+    border-radius: 3px;
+    opacity: 0.75;
+    /* for a smooth hover effect */
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    &:hover,
+    &:focus {
+        background-color: $color !important;
+        border-color: $color !important;
+        text-decoration: none;
+        opacity: 1;
+    }
+    &:active {
+        -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+        box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+        background: $color !important;
+        border: solid 1px $color !important;
+    }
+    &:disabled {
+        cursor: not-allowed;
+        filter: alpha(opacity=65);
+        box-shadow: none;
+        opacity: .65;
+        &:hover,
+        &:focus {
+            border-color: none !important;
+            background: gray !important;
+        }
+    }
+}
+
+.disabled {
+    cursor: not-allowed;
+}
+
+.btn-link,
+.btn-custom {
+    cursor: pointer;
+}
+
+//override success button css
+.btn-success {
+    @include btn-success-mixin($primary_color);
+}
+
+.btn-success-grey {
+    @include btn-success-mixin($grey);
+}
+
+
+/*
+.button-link {
+	padding: 10px 15px;
+	background: #4479BA;
+	color: #FFF;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border: solid 1px #20538D;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	-webkit-transition-duration: 0.2s;
+	-moz-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+.button-link:hover {
+	background: #356094;
+	border: solid 1px #2A4E77;
+	text-decoration: none;
+}
+.button-link:active {
+	-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+	-moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+	box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+	background: #2E5481;
+	border: solid 1px #203E5F;
+}*/
+
+.ad-form-info {
+    color: #aaa;
+    font-size: .8em;
+    &:hover {
+        color: darken(#aaa, 15);
+    }
+}
+
+.loading-wrapper {
+    text-align: center;
+    font-size: 2em;
+    font-weight: normal;
+    color: $primary_color;
+}
+
+.fast-spin {
+    -webkit-animation: fa-spin .7s infinite linear;
+    animation: fa-spin .7s infinite linear;
+}
+
+.ad-text-title{
+    /*position: absolute;
+    top: -24px;*/
+    font-weight: bold;
+    font-size: .9em;
+    color:#ff8800;
+    display:inline-block;
+    float:left;
+
+    &:after {
+        content:": ";
+    }
+}
+
+marquee {
+    display:inline-block; 
+    width:45%;
+    float:right;
+}
+
+//for over-flowing text and urls flowing out of their container
+@mixin ellipsis() {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ellipsis {
+    @include ellipsis();
+}
+
+@media (max-width: 992px) {
+    .s-side-bar {
+        position: relative;
+        .side-bar-preview {
+            position: relative;
+            width: 100%;
+        }
+    }
+}
+
+
+
+.clear-fix {
+    clear: both;
+}
+
+.clearfix {
+    display: inline-block;
+    &:after {
+        content: "";
+        display: block;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+}
+
+
+/*Hides from IE-mac \*/
+
+* html .clearfix {
+    height: 1%;
+}
+
+.clearfix {
+    display: block;
+}
+
+
+/* End hide from IE-mac */
+
+
+/* @end */

@@ -1,0 +1,83 @@
+<div id="manage-ads-page" class="card" style="margin: auto; max-width: 1000px; margin-top:50px">
+
+  <h4>Manage adverts</h4>
+  <br/>
+
+    <div class="header-btns">
+      <!--<a href="#" class="btn btn-custom">Sort by &nbsp; <span class="glyphicon glyphicon-triangle-bottom"></span></a>-->
+      <a routerLink="/newadvert" routerLinkActive="active" class="btn btn-custom">
+        <span class="glyphicon glyphicon-plus"></span> &nbsp; Create an advert
+    </a>
+    </div>
+
+    <!-- adverts table -->
+    <data-table id="films-grid" headerTitle="" [items]="user_adverts" [itemCount]="advertCount" (reload)="reloadAdverts($event)"
+      [limit]="10" [sortBy]="'id'" [sortAsc]="false" [selectColumn]="false" [multiSelect]="false" [substituteRows]="false"
+      [expandableRows]="true" [translations]="translations" [indexColumnHeader]="'#'" [selectOnRowClick]="false">
+
+      <ng-template #dataTableExpand let-item="item">
+        <div [textContent]="item.description + ' - created on: [' + item.creation_date_time + ']'" style="padding: 5px; color:#b7620080;text-align:left;"></div>
+      </ng-template>
+
+      <data-table-column [property]="'campaign_name'" [header]="'Campaign'" [sortable]="true"  width="160px" style="text-align:left;" [resizable]="true"> </data-table-column>
+      <data-table-column [property]="'cost'" [header]="'Cost(UGX)'" [sortable]="true"  width="110px"> </data-table-column>
+      <data-table-column [property]="'estimated_views'" [header]="'est. views'" [sortable]="true" [cellColors]="cellColor"   width="100px"> </data-table-column>
+      <data-table-column [property]="'start_date'" [header]="'start date'" [sortable]="true"  width="110px"> </data-table-column>
+      <data-table-column [property]="'end_date'" [header]="'end date'" [sortable]="true"  width="110px"> </data-table-column>
+      <data-table-column [property]="'readable_status'" [header]="'status'" [sortable]="true" width="100px"> </data-table-column>
+      <!-- invisible column there for default sorting purpose - to show new campaigns first TO DO: it is not working/sorting as expected, check it -->
+      <data-table-column [visible]="false" [property]="'id'" [header]="'id'" [sortable]="true"> </data-table-column>
+
+      <data-table-column header="copy"  width="50px">
+        <ng-template #dataTableHeader let-item="item">
+          <i >copy</i>
+        </ng-template>
+        <ng-template #dataTableCell let-item="item">
+          <a [routerLink]="['/edit_advert', item.campaign_id]" routerLinkActive="active"><img src="../../assets/edit-icon.png" style="width:20px;"/></a>
+        </ng-template>
+      </data-table-column>
+
+
+      <data-table-column header="view"   width="50px">
+        <ng-template #dataTableHeader let-item="item">
+          <i>view</i>
+        </ng-template>
+        <ng-template #dataTableCell let-item="item">
+          <a [routerLink]="['/show_advert',item.campaign_id]" routerLinkActive="active"><img src="../../assets/view-icon.png" style="width:20px;"/></a>
+        </ng-template>
+      </data-table-column>
+
+    </data-table>
+
+    <!--loading spinner -->
+    <div class="loading-wrapper" *ngIf="user_adverts_loading">
+        <div class="fa fa-circle-o-notch fast-spin"></div>
+    </div>
+
+    <!-- no ads - create advert call to action -->
+    <div *ngIf="user_has_no_adverts">
+        <p class="alert alert-info">
+          You can now reach your potential customers from the comfort of your mobile phone or computer.
+        </p>
+        <div class="center">
+          <a routerLink="/newadvert" routerLinkActive="active" class="btn btn-success">Create an advert</a>
+        </div>
+    </div>
+
+    <!-- loading adverts error -->
+    <div class="show-ads-error" *ngIf="failed_to_load_adverts">
+        <p class="alert alert-danger">
+          {{ load_advert_error_message }}
+        </p>
+        <div class="center">
+          <button class="btn btn-success" (click)="reloadPage()"> <span class="glyphicon glyphicon-refresh"></span> Retry</button>
+        </div>
+    </div>
+
+   <!-- <div style="margin-top: 10px">
+      <b>Selected:</b>
+      <span *ngIf="advertsTable.selectedRow == null"><i>No item selected</i></span>
+      <span [textContent]="advertsTable.selectedRow && advertsTable.selectedRow.item.campaign_name"></span>
+    </div>-->
+
+</div>

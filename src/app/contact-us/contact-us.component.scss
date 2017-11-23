@@ -1,0 +1,97 @@
+    .header {
+        color: rgba(0, 0, 0, 1);
+        font-size: 27px;
+        padding: 10px;
+    }
+
+    .bigicon {
+        font-size: 20px;
+        color: rgba(0, 0, 0, .5);
+        margin-right: 10px;
+        width: 20px;
+    }
+
+    #contact-us-page {
+        padding-top: 7em;
+        max-width: 700px;
+        min-width:300px;
+        margin: 0 auto;
+        .btn-section {
+            width: 100%;
+            text-align: left;
+            display: inline-block;
+            .btn-success {
+                float: none;
+                width: 100px;
+                margin: auto;
+            }
+        }
+        .heading {
+            opacity: 1;
+        }
+        .input-span {
+            .message-label {
+                padding-bottom: 5px;
+            }
+            label {
+                width: 14em;
+                margin-right: 3em;
+                font-size: 0.85em;
+                opacity: 0.8;
+            }
+            input,
+            select {
+                max-width: 23em;
+                margin-right: 0.5em;
+            }
+            select {
+                text-align: center;
+                text-decoration-style: none;
+            }
+            .help-message {
+                max-width: 12.5em;
+                padding-left: 0px;
+                margin-left: 0px;
+            }
+            label,
+            input,
+            select,
+            .help-message {
+                float: none;
+                /* if you had floats before? otherwise inline-block will behave differently */
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+        hr {
+            margin-bottom: 20px
+        }
+    }
+
+    .btn-primary {
+        color: #FFFFFF;
+        background-color: #FF8800;
+        border: 1px solid #FF8800;
+        border-radius: 3px;
+        padding: 5px 20px;
+        font-size: 1em;
+        &:focus {
+            background-color: rgba(0, 0, 0, .25);
+            border: 1px solid rgba(0, 0, 0, .25);
+        }
+    }
+
+    @media (max-width: 500px) {
+        #contact-us-page .input-span label {
+            display: inline;
+        }
+        #contact-us-page .input-span textarea {
+            max-width: 100%;
+        }
+    }
+
+    @media (min-width: 900px) {
+        #contact-us-page .input-span textarea {
+            max-width: 600px;
+        }
+    }

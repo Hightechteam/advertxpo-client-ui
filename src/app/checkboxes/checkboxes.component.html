@@ -1,0 +1,57 @@
+<div class="container">
+  <h1>Amazing skills app...</h1>
+
+  <h3>List of existing skillers</h3>
+  <table class="table">
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>skills</th>
+      <th>options</th>
+    </tr>
+    <tr *ngFor="let u of users">
+      <td>{{ u.id }}</td>
+      <td>{{ u.name }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let s of u.skills">
+            {{s.name}}
+          </li>
+        </ul>
+      </td>
+      <td>
+        <a href="#" (click)="edit(u.id); false">Edit</a>
+      </td>
+    </tr>
+  </table>
+
+  <h3>Add a skill</h3>
+  <form [formGroup]="form" (submit)="submit(form)">
+    <div class="form-check">
+      <label for="name"> Insert the name </label>
+      <input id="name" class="form-control" formControlName="name" />
+    </div>
+
+    <div formArrayName="skills" class="form-group">
+
+      <div *ngFor="let skill of skills.controls; let i=index" [formGroupName]="i">
+        <div class="form-check">
+          <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" formControlName="selected" /> 
+              {{mockSkills[i].name}}
+          </label>
+        </div>
+      </div>
+      
+    </div>
+
+    <button type="submit" class="btn btn-info">Submit</button>
+  </form>
+
+  <br />
+  <ul>
+    <li>current form: <br /> {{ form.value | json }}</li>
+    <li>user after submit: <br /> {{user | json}}</li>
+  </ul>
+  <br /> all users : {{users | json}}
+</div>

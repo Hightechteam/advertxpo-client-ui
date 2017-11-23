@@ -1,0 +1,114 @@
+$primary_color: #f90;
+$primary_black: rgba(0,0,0,0.7);
+
+.show-advert-page{
+    padding-top: 50px;
+
+    .top-section{
+        background-color: #fff;
+        padding: 1em;
+        margin-bottom: 2em;
+    }
+
+    table{
+        width: 100%;
+
+        td{
+            padding: .3em;
+        }
+        .td-label{
+            width: 25%;
+            text-align: right;
+            vertical-align: top;
+        }
+        .td-values{
+            padding-left: 1em;
+        }
+
+        .time-slot{
+            margin-bottom: 1em;
+
+            .time-slot-title{
+                font-weight: bold;
+                border-bottom: 2px solid #eee;
+            }
+
+            .time-slot-days-list{
+                li{
+                    display: inline-block;
+                    margin: .3em;
+                    font-size: .9em;
+                    border-bottom: 2px solid cadetblue;
+                }
+            }
+        }
+
+    }
+    
+    .image-thumbs{
+
+        h5{
+            font-weight: bold;
+            border-bottom: 2px solid #eee;
+            padding-bottom: .5em;
+        }
+
+        li{
+            float: left;
+        }
+        img{
+            max-width: 100px;
+            max-height: 150px;
+            border: 2px solid #eee;
+            margin: 0 1em;
+        }
+    }
+
+    .advert-sections{
+        font-size: .9em;
+        .section{
+
+            h4{
+                color: $primary_color;
+                border-bottom: 2px solid #eee;
+                padding-bottom: .7em;
+            }
+
+            ul{
+                list-style: none;
+                padding: 0;
+            }
+
+            .lbl{
+                font-weight: bold;
+            } 
+        }
+    }
+
+}
+
+.display-count{
+    .value{
+        font-size: 2.5em;
+        margin: 0.7em;
+    }
+}
+
+.stat-fields{
+
+    .field{
+        margin-bottom: 1em;
+
+        .f-label{
+            font-size: .8em;
+        }
+
+        .f-value{
+            font-size: 1.2em;
+        }
+    }
+}
+
+.card-stat{
+    border-top: 2px solid $primary_color;
+}

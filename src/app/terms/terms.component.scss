@@ -1,0 +1,78 @@
+#terms-page {
+    * {
+        font-weight:lighter;
+    }
+
+    margin: 0 auto;
+
+    .form-wrapper {
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.6);
+    }
+    .blend-strip {
+
+        position: fixed;
+        top: 0px;
+        height: 200px;
+        background: black;
+        width: 100%;
+        margin: 0 auto;
+        right: 0;
+        left: 0;
+        z-index: -1;
+    
+    }
+
+    .chapter {
+
+        
+        padding-left: 0px; //same line
+
+        .term {
+            
+            counter-reset: term-count;
+            
+            > p {
+                margin-left:30px; //even out the margin of the numbering - so that the multi line paragrapsh are all on the same line
+            
+                &:before {
+
+                    position: absolute;
+                    margin-left: -30px;//these 2 push the number to far left
+                    color: #000;
+                    counter-increment: term-count;
+                    content: counter(term-count) ".";
+                    
+                }
+            }
+
+            > .sub-term {
+                
+                counter-reset: sub-term-count;
+                margin-left: 70px;
+
+                > p {
+                    
+                    &:before {
+    
+                        position: absolute;
+                        margin-left: -40px;///these 2 push the numbering to far left
+                        font-style:oblique;
+                        color: #000;
+                        counter-increment: sub-term-count;
+                        content: counter(sub-term-count, lower-roman) ").";
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    h4 {
+        font-weight:500;
+        padding-top:20px;
+        padding-bottom:5px;
+    }
+
+}
+
+

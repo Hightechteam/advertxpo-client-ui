@@ -1,0 +1,107 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title" id="myModalLabel">Advert submited</h4>
+    <div class="advert-steps">
+      <div class="row">
+        <div class="advert-line">
+          <div class="line"></div>
+        </div>
+        <div class="col-xs-4 ad-step">
+          <span class="label-number">
+            1
+          </span>
+          <div>Payment</div>
+          <div class="ad-status-icon" *ngIf="!payment_completed">
+            <i class="fa fa-circle-o-notch fast-spin"></i>
+          </div>
+
+          <div class="ad-status-icon" *ngIf="payment_completed">
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+          </div>
+
+        </div>
+        <div class="col-xs-4 ad-step">
+          <span class="label-number">
+            2
+          </span>
+          <div>
+            Review
+          </div>
+          <div class="ad-status-icon" *ngIf="advert_in_review">
+            <i class="fa fa-circle-o-notch fast-spin"></i>
+          </div>
+
+          <div class="ad-status-icon" *ngIf="advert_approved">
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+          </div>
+
+        </div>
+        <div class="col-xs-4 ad-step">
+          <span class="label-number">3</span>
+          <div>Scheduled</div>
+          <div class="ad-status-icon" *ngIf="advert_approved">
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+
+    <div class="row">
+
+      <div class="col col-md-7" *ngIf="!payment_completed">
+        <h5> To complete the payment follow the steps below</h5>
+        <ul>
+          <li>Dial *165#</li>
+          <li>Select 00. Next</li>
+          <li>Select 9. My Approvals</li>
+          <li>Select the transaction from the list</li>
+          <li>Select 1. Yes </li>
+        </ul>
+      </div>
+
+      <div class="col col-md-7" *ngIf="advert_in_review">
+        <h5>Advert in review</h5>
+        <p>All adverts are reviewed to ensure that they comply with the communications policy. <br/>See <a style="text-decoration:underline;" routerLink="/terms" routerLinkActive="active" target="_blank" >terms of service </a> </p>
+      </div>
+
+      <div class="col col-md-7" *ngIf="advert_approved">
+        <h5>Advert approved.</h5>
+        <p>Your advert has been approved. </p>
+      </div>
+
+      <div class="col-md-5">
+        <div class="quick-ad-statistics">
+          <div class="field">
+            <span class="f-label">Display count:</span>
+            <span class="f-value">{{ advert_estimates.display_count }}</span>
+          </div>
+
+          <div class="field">
+            <span class="f-label">Estimated number of screens:</span>
+            <span class="f-value">{{ advert_estimates.target_reach_screens }}</span>
+          </div>
+
+          <div class="field">
+            <span class="f-label">Estimated number of people:</span>
+            <span class="f-value">{{ advert_estimates.target_reach_audience }}</span>
+          </div>
+
+          <div class="field">
+            <span class="f-label">Amount: </span>
+            <span class="f-value">{{ advert_estimates.target_reach_amount }}/=</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a routerLink="/home" class="btn btn-custom" (click)="hideAdvertStatusModal()">Home</a>
+    <a routerLink="/newadvert" routerLinkActive="active" class="btn btn-success" (click)="hideAdvertStatusModal()">New Advert</a>
+  </div> 
+</div>

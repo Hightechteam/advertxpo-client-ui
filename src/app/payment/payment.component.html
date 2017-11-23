@@ -1,0 +1,55 @@
+<div class="card" id="payment_info_card">
+  <div class="card-title">
+    <h5>Payment Method <span class="step-description float-right">STEP 4 of 4</span></h5>
+    <span>Select preferred payment method</span>
+
+    <div class="error-message" *ngIf="paymentInfo.paymentMethodNotSelected">
+      Please select Payment method
+    </div>
+  </div>
+
+  <div class="payment-fields" [hidden]="loadingDone()">
+    <div class="card-content">
+
+
+      <div class="layout-btn">
+
+          <input type="radio" name="payment_method" 
+              id="mtn_momo" value="MTNMOMO_UG" 
+              [(ngModel)] = "paymentInfo.payment_method"
+              (change) = "paymentMethodChanged()" >
+          <label for="mtn_momo"> MTN mobile money </label>
+
+          <div class="" *ngIf="isMobileMoneySelected()">
+              <div>enter mobile money number <span class="help-text">(format: 07xxxxxxxx)</span></div>
+              <div>
+                <input type="text" 
+                  [(ngModel)] = "paymentInfo.account_number"
+                  (keyup) = "accountNumberChanged()"  class="form-control custom-input">
+                  <div class="error-message" *ngIf="paymentInfo.accountNumberIsInvalid">
+                    Please enter a valid MTN phone number.
+                  </div>
+              </div>
+          </div>
+<br/>
+          <input type="radio" name="payment_method" 
+          id="seyeya-credit" value="SEYEYA_CREDIT" 
+          [(ngModel)] = "paymentInfo.payment_method"
+          (change) = "paymentMethodChanged()" >
+          <label for="seyeya-credit"> My account <span style="color:rgba(255, 136, 0, 0.7);font-size:75%;">(balance 25,000/-) </span></label>
+
+      </div>
+
+      <!--<div class="card-action-buttons" *ngIf="paymentInfo.payment_method">
+            <button class="btn"> Review information </button>
+            <button class="btn btn-success"> Place order </button>
+        </div>-->
+
+    </div>
+  </div>
+
+  <div class="loading-wrapper" [hidden]="!loadingDone()">
+    <div class="fa fa-circle-o-notch fast-spin"></div>
+  </div>
+
+</div>

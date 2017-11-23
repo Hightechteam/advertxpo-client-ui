@@ -1,0 +1,94 @@
+<div id="manage-account-page">
+  <div class="container">
+
+    <h4>Manage account</h4>
+
+    <div class="card">
+      <div class="personal-information">
+        <h5>Personal information</h5>
+
+        <div class="form-group">
+          <label for="first-name">First name</label>
+          <input type="text" id="first-name" [(ngModel)] = "first_name">
+        </div>
+
+        <div class="form-group">
+          <label for="other-name">Other names</label>
+          <input type="text" id="other-name" [(ngModel)] = "second_name">
+        </div>
+
+        <div class="form-group">
+          <label for="email-address">Email address</label>
+          <input type="text" id="email-address" [(ngModel)] = "email_address">
+        </div>
+
+        <div class="form-group">
+          <label for="other-phone-number">Other phone number</label>
+          <input type="text" id="other-phone-number" [(ngModel)] = "other_phone_number">
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-success" (click) = "savePersonalInfoClicked()">Save</button>
+          <span class="fa fa-circle-o-notch fast-spin profile-spinner" *ngIf="saving_personal_info_in_progress"></span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="business-information">
+        <h5>Business information</h5>
+
+        <div class="form-group">
+          <label for="business-name">Business name</label>
+          <input type="text" id="business-name" [(ngModel)] = "business_name">
+        </div>
+
+        <div class="form-group">
+          <label for="business-type">Business type</label>
+          <input type="text" id="business-type" [(ngModel)] = "business_type">
+        </div>
+
+        <div class="form-group">
+          <label for="business-location">Business location</label>
+          <input type="text" id="business-location" [(ngModel)] = "business_location">
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-success" (click)="saveBusinessInformation()">Save</button>
+          <span class="fa fa-circle-o-notch fast-spin profile-spinner" *ngIf="saving_business_info_in_progress"></span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="payment-information">
+        <h5>Payment information</h5>
+
+         <div class="form-group">
+          <label for="payment-method">Payment Method</label>
+          <select id="payment-method" [(ngModel)] = "payment_method">
+            <option value=""> -- Select payment method -- </option>
+            <option value="1">MTN Mobile money</option>
+          </select>
+        </div>
+
+         <div class="form-group">
+          <label for="account-number">Account number</label>
+          <input type="text" id="account-number" [(ngModel)] = "account_number">
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-success" (click)="savePaymentInformation()">Save</button>
+          <span class="fa fa-circle-o-notch fast-spin profile-spinner" *ngIf="saving_payment_info_in_progress"></span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+

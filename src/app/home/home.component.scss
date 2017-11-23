@@ -1,0 +1,336 @@
+$primary_color:#FF8800;
+$jumbo_size: 700px;
+$page_width: 1200px;
+
+
+$video_without_text_height: 190px;
+$video_with_text_height: 200px;
+$screen-text-height: 40px;
+$black:#000;
+$white:#fff;
+
+
+#home-component {
+    width: 100%;
+    position: relative;
+    .contents {
+        position: absolute;
+        width: 100%;
+        height: $jumbo_size;
+        background-color: #fff;
+        background-image: url("../../assets/bg.jpg");
+        background-size: cover;
+        left: 0;
+        top: 0;
+        
+        .overlay {
+            padding: 1.5em;
+            padding-top: 140px;
+            position: absolute;
+            width: 100%;
+            height: $jumbo_size;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.77);
+            color: #fff;
+            text-align: center;
+            h1 {
+                font-size: 2.2em;
+                margin-top: 3em;
+                line-height: 1.2em;
+                font-weight: 100;
+                text-shadow: 0 1px 1px #000;
+            }
+            h3 {
+                font-size: 20px;
+                text-shadow: 0 1px 1px #000;
+                .highlight {
+                    color: $primary_color;
+                }
+            }
+            .btn-signup {
+                padding: .7em 3em;
+                display: inline-block;
+                border-radius: 4px;
+                margin: auto 1em;
+                font-size: .9em;
+                font-weight: bold;
+            }
+            .create-advert-btn {
+                color: #fff;
+                background-color: $primary_color;
+                margin-top: 2.5em;
+                display: inline-block;
+                font-size: .9em;
+                border-radius: 5px;
+                padding: .7em 3em;
+                font-weight: bold;
+                margin: auto 1em;
+                margin-bottom: 1.5em;
+                text-shadow: 0 0 1px #000;
+                &:hover {
+                    background-color: darken($primary_color, 10);
+                    text-decoration: none;
+                }
+            }
+        }
+        .action-buttons {
+            text-align: center;
+            margin-top: 5em;
+        }
+    }
+}
+
+.home-content {
+    padding-top: $jumbo_size;
+    .black-strip {
+        background-color: rgba(0, 0, 0, 0.9);
+        color: $primary_color;
+        padding: 2em;
+        line-height: 20px;
+        text-align: center;
+        .content {
+            max-width: $page_width;
+            margin: 0 auto;
+            
+        }
+        .btn-sign-up {
+            color: #fff;
+            border: 1px solid #ccc;
+            padding: .3em 1.2em;
+            display: inline-block;
+            border-radius: 3px;
+            margin: 0 .5em;
+            text-decoration: none;
+            &:hover,
+            &:focus {
+                background-color: white;
+                color: black;
+            }
+        }
+        .learn-more {
+            color: #fff;
+            font-size: .9em;
+            text-decoration: underline;
+            margin-left: 0.5em;
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                color: $primary_color;
+                opacity: 0.75;
+            }
+        }
+    }
+    .app-description {
+        background-color: #fff;
+        //padding-bottom: 1em;
+        .content {
+            max-width: $page_width;
+            margin: 0 auto;
+            padding: 3em 1em;
+            .advertisers,
+            .partners {
+                margin-bottom: 2.25em;
+            }
+        }
+        p {
+            margin-bottom: .5em;
+        }
+        h2 {
+            font-size: 1.5em;
+            padding-bottom: .5em;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 1em;
+        }
+        .link {
+            background-color: #777;
+            color: #fff;
+            display: inline-block;
+            padding: .2em 1em;
+            font-size: .9em;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+        .advertise-btn {
+            margin-bottom: .7em;
+            .link {
+                background-color: $primary_color;
+                text-shadow: 0 0 1px #777;
+            }
+            
+        }
+
+        .small-span {
+            font-size: .8em;
+            vertical-align:bottom;
+        }
+        .img-place {
+
+            img {
+                height: 100%;
+                width:100%;
+
+            }
+            //background-color: #ccc;
+            
+            margin-top: 3.5em;
+            border-radius: 2px;
+        }
+        .mini-signup-form {
+            padding: 2em 0 2em 0;
+            h4 {
+                color: #777;
+                margin-top: 0;
+                font-weight: bold;
+                font-size: 150%;
+            }
+            p {
+                font-size: .8em;
+            }
+            input[type=text] {
+                height: 45px;
+            }
+            .continue {
+                width: 100%;
+                height: 45px;
+                font-size: 120%;
+            }
+
+            .space {
+                margin:1em auto;
+            }
+        }
+    }
+    .how-it-works {
+        background-color: rgb(231, 231, 231);
+        .contents {
+            max-width: $page_width;
+            margin: 0 auto;
+            padding: 3em 2em;
+            h2 {
+                font-size: 1.5em;
+                padding-bottom: .5em;
+                border-bottom: 1px solid #ccc;
+                margin-bottom: 1em;
+            }
+            .steps {
+                text-align: center;
+                margin-top: 2em;
+
+                .heading{
+
+                    color: $primary_color;
+                    font-size: 1.1em;
+                    font-weight: normal;
+                    text-shadow: 0 0 1px #fff;
+                    margin: 1em 0;
+                    height: 40px;
+                }
+
+                
+                .icon {
+                    border: 1px solid #d2d2d2;
+                    border-radius: 50%;
+                    width: 130px;
+                    font-size: 3em;
+                    height: 130px;
+                    color: #555;
+                    padding-top: 35px;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+    .footer {
+        background-color: rgb(82, 82, 82);
+        .content {
+            padding: 2em 2em;
+            font-size: .9em;
+            color: #fff;
+            a {
+                color: #fff;
+                text-decoration: none;
+                &:hover {
+                    color: $primary_color;
+                }
+            }
+            ul {
+                margin-bottom: 2em;
+                li {
+                    text-shadow: 0 0 1px #000;
+                    padding: .3em 0;
+                    text-align: center;
+                }
+            }
+            .site-branding {
+                text-align: center;
+                img {
+                    max-width: 125px;
+                }
+            }
+        }
+    }
+}
+
+
+.three-split-screen-layout-preview{
+    border: 1px solid #000;
+    
+    .row, .col{
+        margin: 0;
+        padding: 0;
+    }
+    .video-area{
+        background-image:url("../../assets/flavia.png");
+        background-repeat: no-repeat;
+        height: $video_with_text_height;
+        background-size:contain;    /*cover*/   
+        background-position: center center;      
+    }
+
+    .advert-img-area{
+        height: $video_with_text_height;
+        overflow: hidden;
+        position:relative;
+        text-align:center;
+        line-height: $video_with_text_height;
+        background-color:#dadada;
+        border-left:1px solid #c7c7c7;
+        
+        .ad-image {
+            margin: 0 auto;
+            vertical-align:middle;
+            text-align:center;
+            display: inline-block;
+            line-height: normal;
+            font-weight:bold;
+            color:#ff8800;
+        }
+    }
+
+    .advert-text-area{
+        padding: .5em;
+        background: $black;
+        height: $screen-text-height;
+        font-size: .9em;
+        color:$white;
+        vertical-align:middle;
+        text-align:center;
+
+        
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .overlay{
+        margin-top:0;
+    }
+
+    .mini-signup-form {
+        padding:0 auto;
+    }
+
+}

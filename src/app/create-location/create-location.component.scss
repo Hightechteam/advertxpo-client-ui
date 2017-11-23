@@ -1,0 +1,87 @@
+$primary_color: #FF8800;
+#create-location-page {
+    padding-top: 7em;
+    max-width: 900px;
+    margin: auto auto;
+    .btn-section {
+        * {
+            margin: 5px 10px;
+        }
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+        .btn-success {
+            float: none;
+            width: 100px;
+            margin: auto;
+        }
+        hr {
+            margin-bottom: 20px
+        }
+    }
+    .btn-new {
+        background-color: #2A3F54;
+    }
+    hr {
+        width: 85%;
+        margin-left: 0em;
+        margin-top: 10px;
+        min-width: 17.5em;
+    }
+    .section {
+        margin-bottom: 2.5em;
+        margin-top: 1em;
+        >.heading {
+            opacity: 1;
+        }
+        .subsection {
+            margin-bottom: 2em;
+        }
+    }
+    .input-span {
+        label {
+            width: 14em;
+            margin-right: 3em;
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+        input,
+        select {
+            max-width: 23em;
+            margin-right: 0.5em;
+        }
+        select {
+            text-align: center;
+            text-decoration-style: none;
+        }
+        .help-message {
+            max-width: 12.5em;
+            padding-left: 0px;
+            margin-left: 0px;
+        }
+        label,
+        input,
+        select,
+        .help-message {
+            float: none;
+            /* if you had floats before? otherwise inline-block will behave differently */
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+    .checkboxes {
+        * {
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+        span {
+            display: inline-block;
+            padding-right: 1em;
+        }
+        label {
+            padding-left: 0.5em;
+            margin-right: 0.5em;
+            width: 200px;
+        }
+    }
+}

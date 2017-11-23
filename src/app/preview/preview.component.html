@@ -1,0 +1,459 @@
+<!-- Side-bar preview -->
+<div class="side-bar-preview">
+  <div class="card">
+
+    <div class="card-title">
+      <h5>AD Preview & Summary<i *ngIf="show_loading_spinner" class="fa fa-spinner fa-spin pull-right"></i></h5>
+      <span>select layout to see how your advert will display</span>
+
+    </div>
+
+    <div class="card-content">
+
+      <div class="full-screen-layout-preview" *ngIf="ad_basic_info.fullScreenSelected()">
+        <div class="video-area">
+          <div class="row" *ngIf="ad_basic_info.image_preview_url">
+            <div class="col-sm-12">
+              <div class="center">
+                <img [src]="ad_basic_info.image_preview_url" class="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="three-split-screen-layout-preview" *ngIf="ad_basic_info.threeScreenSplitSelected()">
+        <div class="row">
+          <div class="col col-xs-8">
+            <div class="video-area"></div>
+          </div>
+          <div class="col col-xs-4 advert-img-area">
+
+            
+            <div class="row ad-image" *ngIf="ad_basic_info.image_preview_url">
+
+              <img [src]="ad_basic_info.image_preview_url" class="img-responsive" />
+
+            </div>
+          </div>
+          <div class="col col-xs-12">
+            <div class="advert-text-area">
+
+              <!--<div *ngIf="ad_basic_info.advert_text">-->
+              <div>
+                <div class="ad-text-title">{{ ad_basic_info.advert_title }}</div>
+                <marquee scrollamount="4"> {{ ad_basic_info.advert_text }} </marquee>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-split-screen-layout-preview" *ngIf="ad_basic_info.twoScreenSplitSelected()">
+        <div class="row">
+          <div class="col col-xs-8">
+            <div class="video-area"></div>
+          </div>
+          <div class="col col-xs-4">
+            <div class="advert-img-area">
+              <div class="advert-img-area">
+                <div class="row" *ngIf="ad_basic_info.image_preview_url">
+                  <div class="">
+                    <img [src]="ad_basic_info.image_preview_url" class="img-responsive" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-only-screen-layout-preview" *ngIf="ad_basic_info.textOnlySelected()">
+        <div class="row">
+          <div class="col col-xs-12">
+            <div class="video-area"></div>
+          </div>
+          <div class="col col-xs-12">
+            <div class="advert-text-area">
+              <!--<div *ngIf="ad_basic_info.advert_text">-->
+              <div>
+                <div class="ad-text-title">{{ ad_basic_info.advert_title }}</div>
+                <marquee scrollamount="4"> {{ ad_basic_info.advert_text }} </marquee>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="reach-cost-preview">
+
+
+        <div>
+          <label class="lbl">Targeted screens: </label>
+          <label class="value"> {{ estimated_screens }} / {{ potential_screen_count }}</label>
+          <div class="progress estimation-bar">
+            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+              [style.width]="estimated_screens_percentage + '%'">
+            </div>
+          </div>
+        </div>
+
+
+        <div>
+          <label class="lbl">Estimated audience: </label>
+          <label class="value"> {{ estimated_people }} / {{ potential_audience_count }}</label>
+          <div class="progress estimation-bar">
+            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+              [style.width]="estimate_people_percentage + '%'">
+            </div>
+          </div>
+          <br/>
+          <div style="padding-top:15px;">
+            <label class="lbl">Estimated views: </label>
+            <label class="value"> {{ target_views }} views</label>
+          </div>
+          <div>
+            <label class="lbl">Cost: </label>
+            <label class="value" style="border-bottom:1px solid #ffa640;"> UGX {{ estimated_display_amount }}/= </label>
+          </div>
+        </div>
+
+
+        <div class="ad-details">
+
+          <div class="form-errors" *ngIf="form_has_errors">
+            <div class="errors">
+              Please correct all errors and try again.
+              <span class="close-btn" (click)="hideAllErrorMessages()">&times;
+              </span>
+              <button style="background-color:#f7f7f7;border:none;border-radius:3px;line-height:1.5em" class="btn-link" data-toggle="modal" data-target="#errorDetailsModal">View error details</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card-action-buttons">
+        <button class="btn-link" data-toggle="modal" data-target="#myModal2"> Review information</button>
+        <button class="btn btn-adsxpo" (click)="saveAdvert()" *ngIf="isUserLoggedIn()">
+                  Save draft<span class="fa fa-circle-o-notch fast-spin" *ngIf="saving_advert_in_progress" ></span> </button>
+        <button (click)="validateAdvert()" class="btn btn-success">
+                  Order now <span class="fa fa-circle-o-notch fast-spin" *ngIf="place_order_in_progress" ></span></button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!-- End sid-bar preview -->
+
+
+<!-- Review information Modal-->
+<div class="modal fade library-modal" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Review information</h4>
+      </div>
+      <div class="modal-body review-info-window">
+
+        <div class="section">
+          <h5>Basic Info</h5>
+          <ul>
+            <li *ngIf="ad_basic_info.campaign_name">Campaign name: {{ ad_basic_info.campaign_name }}</li>
+            <li *ngIf="ad_basic_info.advert_length">Advert length: {{ ad_basic_info.advert_length }} seconds</li>
+            <li *ngIf="ad_basic_info.layout_type">Advert layout: {{ ad_basic_info.layout_type }} </li>
+            <div *ngIf="ad_basic_info.advertTextRequired()">
+              <li *ngIf="ad_basic_info.advert_title">Advert text branding: {{ ad_basic_info.advert_title }}</li>
+              <li *ngIf="ad_basic_info.advert_text">Advert text message: {{ ad_basic_info.advert_text }}</li>
+            </div>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h5>Audience</h5>
+          <ul> 
+            <div *ngIf="targeting_info.target_specific_screen_selected">
+              <li>Target specific screens</li>
+              <ul *ngIf="targeting_info.selected_screens.length > 0">
+                <li *ngFor="let screen of targeting_info.selected_screens">
+                  <span class="place-name">{{ screen.alias }} </span>
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="!targeting_info.target_specific_screen_selected">
+
+              <li>Locations:</li>
+              <ul>
+                <div *ngIf="targeting_info.all_locations_selected">
+                  <li>All locations</li>
+                </div>
+                <div *ngIf="!targeting_info.all_locations_selected">
+                  <li *ngFor="let location of targeting_info.selected_locations">
+                    {{ location.name }}
+                  </li>
+                </div>
+              </ul>
+
+              <li>Business types:</li>
+              <ul>
+                <div *ngIf="targeting_info.all_business_types">
+                  <li>All business types</li>
+                </div>
+                <div *ngIf="!targeting_info.all_business_types">
+                  <li *ngFor="let bt of targeting_info.selected_business_types">
+                    {{ bt.name }}
+                  </li>
+                </div>
+              </ul>
+
+              <li>Audience types:</li>
+              <ul>
+                <div *ngIf="targeting_info.all_audience_types">
+                  <li>All audience types</li>
+                </div>
+                <div *ngIf="!targeting_info.all_audience_types">
+                  <li *ngFor="let at of targeting_info.selected_audience_types">
+                    {{ at.name }}
+                  </li>
+                </div>
+              </ul>
+
+            </div>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h5>Schedule</h5>
+          <ul>
+            <div *ngIf="schedule_info.sheduleNowSelected()">
+              <li>Play now</li>
+            </div>
+            <div *ngIf="schedule_info.sheduleLaterSelected()">
+              <li>Start date: {{ schedule_info.start_date }}</li>
+              <li>End date: {{ schedule_info.end_date }}</li>
+              <li>Time slots</li>
+              <ul>
+
+                <div class="time-slot" *ngIf="schedule_info.rush_hour_selected">
+                  <li class="time-slot-title">Rush hour</li>
+                  <div class="time-slot-preview-advanced-fields">
+                    <div *ngIf="schedule_info.rush_hour_frequency != -1">
+                      Frequency: {{ schedule_info.rush_hour_frequency }}
+                    </div>
+                    <div *ngIf="schedule_info.rush_hour_prefered_time != -1">
+                      Prefered time: {{ schedule_info.rush_hour_prefered_time }}
+                    </div>
+                    <div *ngIf="schedule_info.rush_hour_days.length > 0">
+                      Days
+                      <ul class="time-slot-days-list">
+                        <li *ngFor="let day of schedule_info.rush_hour_days">
+                          {{ getDayName(day) }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="time-slot" *ngIf="schedule_info.prime_time_selected">
+                  <li class="time-slot-title">Prime time</li>
+                  <div class="time-slot-preview-advanced-fields">
+                    <div *ngIf="schedule_info.prime_time_frequency != -1">
+                      Frequency: {{ schedule_info.prime_time_frequency }}
+                    </div>
+                    <div *ngIf="schedule_info.prime_time_prefered_time != -1">
+                      Prefered time: {{ schedule_info.prime_time_prefered_time }}
+                    </div>
+                    <div *ngIf="schedule_info.prime_time_days.length > 0">
+                      Days
+                      <ul class="time-slot-days-list">
+                        <li *ngFor="let day of schedule_info.prime_time_days">
+                          {{ getDayName(day) }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="time-slot" *ngIf="schedule_info.early_bird_selected">
+                  <li class="time-slot-title">Early Bird</li>
+                  <div class="time-slot-preview-advanced-fields">
+                    <div *ngIf="schedule_info.early_bird_frequency != -1">
+                      Frequency: {{ schedule_info.early_bird_frequency }}
+                    </div>
+                    <div *ngIf="schedule_info.early_bird_prefered_time != -1">
+                      Prefered time: {{ schedule_info.early_bird_prefered_time }}
+                    </div>
+                    <div *ngIf="schedule_info.early_bird_days.length > 0">
+                      Days
+                      <ul class="time-slot-days-list">
+                        <li *ngFor="let day of schedule_info.early_bird_days">
+                          {{ getDayName(day) }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="time-slot" *ngIf="schedule_info.lunch_hour_selected">
+                  <li class="time-slot-title">Lunch hour</li>
+                  <div class="time-slot-preview-advanced-fields">
+                    <div *ngIf="schedule_info.lunch_hour_frequency != -1">
+                      Frequency: {{ schedule_info.lunch_hour_frequency }}
+                    </div>
+                    <div *ngIf="schedule_info.lunch_hour_prefered_time != -1">
+                      Prefered time: {{ schedule_info.lunch_hour_prefered_time }}
+                    </div>
+                    <div *ngIf="schedule_info.lunch_hour_days.length > 0">
+                      Days
+                      <ul class="time-slot-days-list">
+                        <li *ngFor="let day of schedule_info.lunch_hour_days">
+                          {{ getDayName(day) }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="time-slot" *ngIf="schedule_info.late_night_selected">
+                  <li class="time-slot-title">Late night</li>
+                  <div class="time-slot-preview-advanced-fields">
+                    <div *ngIf="schedule_info.late_night_frequency != -1">
+                      Frequency: {{ schedule_info.late_night_frequency }}
+                    </div>
+                    <div *ngIf="schedule_info.late_night_prefered_time != -1">
+                      Prefered time: {{ schedule_info.late_night_prefered_time }}
+                    </div>
+                    <div *ngIf="schedule_info.late_night_days.length > 0">
+                      Days
+                      <ul class="time-slot-days-list">
+                        <li *ngFor="let day of schedule_info.late_night_days">
+                          {{ getDayName(day) }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="time-slot" *ngIf="schedule_info.freebie_selected">
+                  <li class="time-slot-title">Freebie</li>
+                  <div class="time-slot-preview-advanced-fields">
+                    <div *ngIf="schedule_info.freebie_frequency != -1">
+                      Frequency: {{ schedule_info.freebie_frequency }}
+                    </div>
+                    <div *ngIf="schedule_info.freebie_prefered_time != -1">
+                      Prefered time: {{ schedule_info.freebie_prefered_time }}
+                    </div>
+                    <div *ngIf="schedule_info.freebie_days.length > 0">
+                      Days
+                      <ul class="time-slot-days-list">
+                        <li *ngFor="let day of schedule_info.freebie_days">
+                          {{ getDayName(day) }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+
+              </ul>
+
+            </div>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h5>Payment</h5>
+
+          <ul>
+            <li>
+              Payment method: {{ getPaymentMethodName(payment_info.payment_method) }}
+            </li>
+            <li *ngIf="payment_info.account_number">
+              Account number: {{ payment_info.account_number }}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-adsxpo" (click)="saveAdvert()" *ngIf="isUserLoggedIn()">
+                  Save <span class="fa fa-circle-o-notch fast-spin" *ngIf="saving_advert_in_progress" ></span> 
+          </button>
+        <button (click)="validateAdvert()" class="btn btn-success" data-dismiss="modal"> Place order </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal -->
+
+<!-- advert status modal-->
+<div class="modal fade" id="advertPlacedModal" tabindex="-1" role="dialog" aria-labelledby="advertPlaced" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <app-advertstatus [ad_basic_info]="ad_basic_info" [advert_estimates]="advert_estimates" *ngIf="ad_basic_info.advertSubmitted"></app-advertstatus>
+  </div>
+</div>
+<!-- End modal -->
+
+<!-- Error details modal -->
+<div class="modal fade" id="errorDetailsModal" tabindex="-1" role="dialog" aria-labelledby="errorDetailsModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Error details</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="error-details">
+
+          <div *ngIf="basic_info_errors.length > 0">
+            <h6>Basic info</h6>
+            <ul>
+              <li *ngFor="let error of basic_info_errors">
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+
+          <div *ngIf="targeting_errors.length > 0">
+            <h6>Targeting Info</h6>
+            <ul>
+              <li *ngFor="let error of targeting_errors">
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+
+          <div *ngIf="schedule_errros.length > 0">
+            <h6>Schedule info</h6>
+            <ul>
+              <li *ngFor="let error of schedule_errros">
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+
+          <div *ngIf="payment_errors.length > 0">
+            <h6>Payment info</h6>
+            <ul>
+              <li *ngFor="let error of payment_errors">
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-custom" data-dismiss="modal"> Close </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end modal -->

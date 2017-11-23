@@ -1,0 +1,32 @@
+:host /deep/ .index-column,
+:host /deep/ .index-column-header {
+    text-align: right;
+}
+
+:host /deep/ .data-table .data-table-row.selected {
+    background-color: #E4EDF9;
+}
+
+#manage-ads-page {
+    margin-top: 100px!important;
+    min-height: 500px;
+    #films-grid {
+        vertical-align: middle;
+        text-align: center;
+        font-size: 12px;
+    }
+    .show-ads-error {
+        .alert {
+            padding: 10px;
+            font-size: 0.8em;
+        }
+        margin-top:30px;
+    }
+    .alert-info {
+        color: rgba(64, 64, 64, 0.84);
+        background-color: #fff6ec;
+        border-color: rgba(255, 136, 0, 0.09);
+        margin-top: 30px;
+        text-align: center;
+    }
+}

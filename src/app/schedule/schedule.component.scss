@@ -1,0 +1,89 @@
+$primary_color: #f90;
+$primary_black: rgba(0,0,0,0.7);
+
+.schedule-date-select-fields{
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    .date-label{
+        display: inline-block;
+        font-weight: normal;
+        font-weight: bold;
+    }
+}
+
+input[type=date]{
+    border: 1px solid #ced0d4;
+    padding: 0.14em 0.1em;
+    max-width: 150px;
+}
+
+.non-bold-label{
+    font-weight: normal;
+}
+
+ .btn-link{
+        color: $primary_color;
+        outline: none;
+    }
+    
+.schedule-advanced-settings{
+    margin-left: 1em;
+    margin-top: 0.5em;
+    border-bottom: 1px solid #eee;
+    line-height:20px;
+    display: none;
+    select{
+        width: 50%;
+        min-width: 120px;
+        max-width:150px;
+        font-size: 1em;
+    }
+
+    .multiple{
+        height: 150px;
+        padding: .5em;
+    }
+
+    select{
+        background: #fff;
+        border: 1px solid #ccc;
+    }
+
+
+
+    .btn {
+        font-size:12px!important;
+        max-width:160px;
+    }
+
+   
+
+    .field{
+        margin-top: 1em;
+    }
+
+    .help-text{
+        position: relative;
+        top: -10px;
+        font-size: 1em;
+    }
+}
+
+
+.layout-btns {
+    .btn-link {
+        padding-left:0;
+        padding-right:0;
+        text-align: left;
+    }
+}
+
+
+.select-days {
+    font-size:12px!important;
+}
+
+.schedule-ad-card {
+    padding-top:0.5em;
+}

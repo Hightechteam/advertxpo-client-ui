@@ -1,0 +1,195 @@
+$primary_color:#FF8800;
+$bgDefault: rgba(0, 0, 0, 0.95);
+$bgHighlight: rgba(0, 0, 0, 0.30);
+$colDefault: #ffffff;
+$colHighlight: #ffffff;
+$dropDown: false;
+.caret {
+    margin-left: 4px;
+}
+
+.dropdown {
+    ul {
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+.navbar-default {
+    background-color: $bgDefault;
+    border-color: $bgHighlight;
+    font-size: .8em;
+    border-top: 2px solid rgba(255, 136, 0, 1);
+    height: 60px;
+    .top-strip {
+        /*background:rgba(255,136,0,1);
+        height: 3px;*/
+    }
+    .navbar-brand {
+        color: $colDefault;
+        img {
+            max-width: 150px;
+            position: relative;
+            top: -7px;
+        }
+        &:hover,
+        &:focus {
+            color: $colHighlight;
+        }
+    }
+    .navbar-text {
+        color: $colDefault;
+    }
+    .navbar-nav {
+        .active {
+            border-bottom: 2px solid white;
+        }
+        >li {
+            >a {
+                border-right: 1px solid rgba(250, 250, 250, 0.25);
+                line-height: 10px;
+                /*height of border line */
+                opacity: 1;
+                padding: 0em 1.5em 0em 0em;
+                margin: 1.7em 0em 1.7em 1.5em;
+                color: $colDefault;
+                &:hover,
+                &:focus {
+                    color: $colDefault;
+                    opacity: 0.6;
+                }
+            }
+            .last-link {
+                color: $primary_color;
+                border: none;
+            }
+            .inactive {
+                //make link not-clickable & italicise
+                color: #aaa;
+                font-style: italic;
+                pointer-events: none;
+                cursor: default;
+                vertical-align: middle;
+            }
+            @if $dropDown {
+                >.dropdown-menu {
+                    background-color: $bgDefault;
+                    >li {
+                        >a {
+                            color: $colDefault;
+                            &:hover,
+                            &:focus {
+                                color: $colHighlight;
+                                background-color: $bgHighlight;
+                            }
+                        }
+                        &.divider {
+                            background-color: $bgHighlight;
+                        }
+                    }
+                }
+            }
+        }
+        @if $dropDown {
+            .open .dropdown-menu>.active {
+                >a,
+                >a:hover,
+                >a:focus {
+                    color: $colHighlight;
+                    background-color: $bgHighlight;
+                }
+            }
+        }
+        >.active {
+            >a,
+            >a:hover,
+            >a:focus {
+                color: $colHighlight;
+                background-color: $bgHighlight;
+            }
+        }
+        >.open {
+            >a,
+            >a:hover,
+            >a:focus {
+                color: $colHighlight;
+                background-color: $bgHighlight;
+            }
+        }
+    }
+    .navbar-toggle {
+        border-color: $bgHighlight;
+        &:hover,
+        &:focus {
+            background-color: $bgHighlight;
+        }
+        .icon-bar {
+            background-color: $colDefault;
+        }
+    }
+    .navbar-form {
+        border-color: $colDefault;
+    }
+    .navbar-collapse {
+        border-color: #313131;
+    }
+    .navbar-link {
+        color: $colDefault;
+        &:hover {
+            color: $colHighlight;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    #contact-no {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    #contact-no {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    #contact-no {
+        display: inline;
+    }
+}
+
+@media (max-width: 767px) {
+    #contact-no {
+        display: inline;
+    }
+    .active {
+        border-bottom: none !important; //remove that big border line
+        a {
+            border-right: none !important; //remove that border line
+            border-bottom: 1px solid #FF8800 !important; //border on element
+            padding-right:0em !important;
+            display: inline;
+        }
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu {
+        >li>a {
+            color: $colDefault;
+            &:hover,
+            &:focus {
+                color: $colHighlight;
+            }
+        }
+        >.active {
+            >a,
+            >a:hover,
+            >a:focus {
+                color: $colHighlight;
+                background-color: $bgHighlight;
+            }
+        }
+    }
+    .navbar-collapse,
+    .navbar-form {
+        background-color: rgba(0, 0, 0, 0.95)
+    }
+}

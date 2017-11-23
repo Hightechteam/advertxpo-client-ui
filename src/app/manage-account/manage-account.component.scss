@@ -1,0 +1,34 @@
+#manage-account-page{
+    padding-top: 70px;
+
+    .card{
+
+        h5{
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .form-group{
+            font-size: .9em;
+            margin-bottom: 15px;
+
+            label{
+                display: block;
+            }
+
+            input, select{
+                background-color: #fff;
+                border-radius: 0;
+                width: 200px;
+                max-width: 100%;
+            }
+        }
+        
+        .profile-spinner{
+            color: cadetblue;
+            display: inline-block;
+            margin-left: 1.4em;
+            font-size: 1.5em;
+        }
+    }
+}

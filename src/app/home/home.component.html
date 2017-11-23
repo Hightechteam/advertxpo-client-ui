@@ -1,0 +1,234 @@
+<div id="home-component" class="container">
+  <div class="contents">
+    <div id="stick-position-home" class="overlay">
+      <h1>grow your business through meaningful connections</h1>
+
+      <h3>
+        <span class="highlight">pick</span> a location and <span class="highlight">play</span> your advert
+      </h3>
+
+      <div class="action-buttons">
+        <a routerLink="/newadvert" routerLinkActive="active" class="create-advert-btn">{{advertiserButtonText}}</a>
+        <a routerLink="/create_location" routerLinkActive="active" class="btn btn-default btn-lg btn-signup">{{locationOwnerButtonText}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="home-content">
+
+  <div id="startchange" class="black-strip">
+    <div class="content">
+      do you own a public location such as a restaurant, bet-shop..? Earn up-to $250 a month.
+      <a routerLink="/create_location" routerLinkActive="active" class="btn-sign-up">{{signUpEarnButtonText}}</a>
+      <!--<a href="#" class="learn-more">learn more</a>-->
+    </div>
+  </div>
+
+  <div class="app-description">
+    <div class="content">
+      <div class="row">
+        <div class="col col-md-8 col-sm-6">
+
+          <h2>What is advertXpo?</h2>
+
+          <div class="advertisers">
+            <p>
+              We help businesses of all sizes grow and improve sales through improved brand awareness and visibility in key locations.
+            </p>
+
+            <div class="advertise-btn">
+              <a routerLink="/newadvert" routerLinkActive="active" class="btn btn-success">advertise now</a> <span class="small-span"> ..starting at $0.001 per view</span>
+            </div>
+          </div>
+
+          <div class="partners">
+            <p>
+              We work with our partners, public location owners. Strategically placing awareness campaigns on digital displays at their locations.
+              Partners can earn up-to $250 a month. Restaurant owners, bars, salons.. are encouraged to sign up and start earning.
+            </p>
+
+            <div class="add-location-btn">
+              <a routerLink="/create_location" routerLinkActive="active" class="btn btn-success-grey">add a location</a>
+              <span
+                class="small-span"> ..and start earning today</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col col-md-4 col-sm-6">
+
+
+          <!-- 
+          <div class="img-place">
+            <img src="../../assets/advertising.jpg" alt="advertising image" />
+          </div>
+        -->
+
+
+        <p style="margin-top:3.6em;color:rgba(0,0,0,0.6);font-size:.85em;"><strong>Preview:</strong> how your ad will display on TV</p>
+
+          <div class="three-split-screen-layout-preview">
+            <div class="row">
+              <div class="col col-xs-8">
+                <div class="video-area"></div>
+              </div>
+              <div class="col col-xs-4 advert-img-area">
+
+                <div class="row ad-image">
+
+                  Images/video adverts
+                </div>
+
+              </div>
+              <div class="col col-xs-12">
+                <div class="advert-text-area">
+                  <div>
+                    <div class="ad-text-title">Your advert title</div>
+                    <marquee scrollamount="4"> Your advert text scrolls here..</marquee>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+          
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+
+      <div *ngIf="!isUserLoggedIn()" class="mini-signup-form">
+        <div class="row">
+          <div class="col col-md-3 col-sm-12 space">
+            <h4>Sign up now</h4>
+            <p>to advertise or add a location</p>
+          </div>
+          <div class="col col-md-3 col-sm-12 space">
+            <input type="text" class="form-control" placeholder="enter your name">
+          </div>
+          <div class="col col-md-3 col-sm-12 space">
+            <input type="text" class="form-control" placeholder="enter your phone number">
+          </div>
+          <div class="col col-md-3 col-sm-12 space">
+            <a routerLink="/signup" routerLinkActive="active" class="btn btn-success continue">continue</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="how-it-works">
+      <div class="contents">
+
+
+        <div class="">
+          <div class="row">
+            <h2>how does it work?</h2>
+            <div class="col col-md-3 col-sm-6 steps">
+              <div class="icon">
+                <span class="glyphicon glyphicon-edit"></span>
+              </div>
+
+              <div class="heading">
+                add location
+              </div>
+              <p>
+                Public location owners sign up locations (with TV screens) such as a restaurant, bar etc.
+              </p>
+            </div>
+            <div class="col col-md-3 col-sm-6 steps">
+              <div class="icon">
+                <span class="glyphicon glyphicon-bullhorn"></span>
+              </div>
+              <div class="heading">
+                create advert and pick audience
+              </div>
+              <p>
+                Advertisers create campaigns targeting audiences at any of the locations
+              </p>
+            </div>
+            <div class="col col-md-3 col-sm-6 steps">
+              <div class="icon">
+                <span class="glyphicon glyphicon-play"></span>
+              </div>
+              <div class="heading">play advert</div>
+              <p>
+                The campaign is played at the targeted locations at the scheduled time
+              </p>
+            </div>
+            <div class="col col-md-3 col-sm-6 steps">
+              <div class="icon">
+                <span class="glyphicon glyphicon-usd"></span>
+              </div>
+              <div class="heading">pay location owners</div>
+              <p>
+                Location (screen) owners are paid for every campaign. Earn upto $250 a month
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+  <div class="footer">
+    <div class="content">
+      <div class="row">
+        <div class="col-sm-3 col-xs-12">
+          <ul class="list-unstyled">
+            <li>256790790491 / 256785923673</li>
+            <li>tweet us: @advertxpo</li>
+            <li>like us: fb.advertxpo</li>
+          </ul>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+          <ul class="list-unstyled">
+            <li><a routerLink="/signup" routerLinkActive="active">sign up</a></li>
+            <li><a routerLink="/newadvert" routerLinkActive="active">advertise</a></li>
+            <li><a routerLink="/create_location" routerLinkActive="active" target="_top" >add a location</a></li>
+          </ul>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+          <ul class="list-unstyled">
+            <li><a routerLink="/faqs" routerLinkActive="active">faqs</a></li>
+            <li><a routerLink="/contact" routerLinkActive="active">contact us</a></li>
+            <li><a>terms of use</a></li>
+            
+          </ul>
+        </div>
+
+        <div class="col-sm-3 col-xs-12">
+          <div class="site-branding">
+            <img src="../assets/logo.png" alt="advertXpo logo" />
+            <p>copyright &copy; 2017<br /> all rights reserved</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+-->
+  </div>

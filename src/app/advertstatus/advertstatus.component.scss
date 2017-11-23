@@ -1,0 +1,65 @@
+.advert-steps{
+    margin: 1em 0;
+
+    .ad-step{
+        text-align: center;
+
+        .label-number{
+              display: inline-block;
+                border: 2px solid #cc7a00;
+                background-color: #fff;
+                color: #000;
+                width: 35px;
+                border-radius: 100px;
+                height: 35px;
+                padding-top: 0.4em;
+        }
+        .ad-status-icon{
+            font-size: 1.7em;
+        } 
+    }
+
+    .advert-line{
+        text-align: center;
+        .line{
+            width: 64%;
+            border: 2px solid #fff;
+            display: inline-block;
+            position: relative;
+            top: 27px;
+        }
+    }
+}
+
+h5{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.quick-ad-statistics{
+    .field{
+        text-align: right;
+        margin-bottom: 1em;
+        color: #777;
+        border-bottom: 1px dashed #ccc;
+
+        .f-label{
+            font-weight: bold;
+            font-size: .8em;
+            display: block;
+        }
+        .f-value{
+            font-size: 1.1em;
+        }
+    }
+}
+
+
+.btn-success.active, .btn-success:active, .open>.dropdown-toggle.btn-success {
+
+    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    background: #FF8800 !important;
+    border: solid 1px #FF8800 !important;
+}

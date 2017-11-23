@@ -1,0 +1,36 @@
+.app-tooltip{
+    display: inline-block;
+    position: relative;
+
+    &:hover{
+         .tooltip-message{
+                display: inline;
+            }
+    }
+
+    .tooltip-message{
+        display: none;
+        font-size: 14px;
+        font-weight: normal;
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        z-index: 20;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: .5em;
+        box-shadow: 2px 2px 2px #ccc;
+        width: 250px;
+    }
+
+    .tooltip-icon{
+        color: #888;
+        font-size: 14px;
+
+        &:hover{
+            color: #444;
+        }
+    }
+
+    
+}

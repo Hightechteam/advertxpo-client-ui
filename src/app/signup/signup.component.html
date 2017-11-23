@@ -1,0 +1,66 @@
+<div id="signup-page">
+
+
+  <div class="login-box form-wrapper">
+    <div class="login-wrapper">
+      <h2>
+        Sign up
+        <i class="fa fa-spinner fa-spin pull-right" *ngIf="loadingInProgress"></i>
+      </h2>
+
+      
+
+      <form (ngSubmit)="signUpFormSubmitted()">
+
+        <div class="form-group required field ">
+          <label class="control-label" for="first_name">First name</label>
+          <input class="form-control custom-input" type="text" name="first_name" [(ngModel)]="first_name" required>
+        </div>
+
+
+        <div class="form-group required field">
+          <label class="control-label" for="email">Phone number</label>
+          <input class="form-control custom-input" type="text" required [(ngModel)]="phone_number" name="phone_number">
+          <div class="help-message"> Format 07xxxxxxxx</div>
+        </div>
+
+        <div class="form-group required field">
+          <label class="control-label" for="email">Password</label>
+          <input class="form-control custom-input" type="password" [(ngModel)]="password" [minlength]="6" name="password" required>
+          <div class="help-message"> Minimum 6 characters</div>
+        </div>
+
+        <div class="form-group required field">
+          <label class="control-label" for="email">Confirm password</label>
+          <input class="form-control custom-input" type="password" name="confirm_password" required [(ngModel)]="password_confirmation">
+        </div>
+
+        <div class="terms-and-conditions-box">
+
+          <label for="accept_terms">
+              <input type="checkbox" required id="accept_terms"  [(ngModel)]="isTermsAccepted" name="isTermsAccepted" > 
+              I agree to the <a target="_blank" routerLink="/terms" routerLinkActive="active" target="_blank">terms of service</a> of advertXpo.
+          </label>
+
+        </div>
+
+        <div class="alert alert-danger" *ngIf="signUpError">
+            {{ signup_error_message }}
+        </div>
+
+        <div class="field">
+          <br />
+          <button class="btn btn-success form-control">Sign up</button>
+        </div>
+
+      </form>
+
+      <br />
+      <a routerLink="/login" routerLinkActive="active">Log in</a>
+
+      
+
+    </div>
+  </div>
+
+</div>

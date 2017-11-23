@@ -1,0 +1,35 @@
+$primary_color:#FF8800;
+
+.footer {
+
+    width: 100%;
+    background-color: #4b4d50;
+    padding: 3em 2em;
+    color: #fff;
+    font-size: .9em;
+    margin-top: 5em;
+    position: relative;
+    bottom: 0px;
+    font-weight: lighter;
+
+    .footer-logo {
+        max-width: 125px;
+    }
+
+    a {
+        color: #fff;
+        &:hover {
+            text-decoration: none;
+            color: $primary_color;
+            opacity: 1;
+        }
+    }
+    .sub-header {
+        font-weight: 500;
+        color: beige;
+        border-bottom:1px solid rgba(245, 245, 220, 0.20);
+        max-width:200px;
+        padding-bottom:4px;
+        margin-bottom:15px;
+    }
+}

@@ -1,0 +1,117 @@
+<div id="create-location-page">
+
+  <div class="create-location-wrapper form-wrapper">
+    <h2>
+      Add a location
+    </h2>
+
+    <form [formGroup]="createLocationForm" (submit)="onSubmit(createLocationForm)" novalidate>
+
+      <!--screen location basic info-->
+      <div class="section" formGroupName="locationInfo">
+        <div class="heading">
+          Screen location basic information:
+        </div>
+
+        <hr/>
+
+        <div class="form-group required subsection">
+          <span class="input-span">
+            <label class="control-label" for="location_contact">Location contact:</label>
+            <input formControlName="phoneContact" class="form-control custom-input" type="text" name="location_contact" placeholder="contact phone">
+            <span class="help-message"> Format 07xxxxxxxx &nbsp;&nbsp;&nbsp;</span>
+          <!--error control -->
+          <control-messages [control]="createLocationForm['controls']['locationInfo']['controls']['phoneContact']"></control-messages>
+          </span>
+
+        </div>
+
+        <div class="form-group required subsection">
+          <span class="input-span">
+            <label class="control-label" for="business_name">Business name:</label>
+            <input formControlName="businessName" class="form-control custom-input" type="text"  name="business_name" placeholder="business name">
+            <span class="help-message"> commonly used name</span>
+          </span>
+          <!--error control -->
+          <control-messages [control]="createLocationForm['controls']['locationInfo']['controls']['businessName']"></control-messages>
+
+        </div>
+
+        <div class="form-group subsection">
+          <span class="input-span">
+              <label class="control-label" for="screens_select">Number of location screens:</label>
+              <select formControlName="screens" data-style="btn-new" class="form-control" name="screens_select">
+                <option value="">--select screens--</option>
+                <option *ngFor="let number of numScreens" [value]="number">{{number}}</option>
+              </select>
+              <span class="help-message">
+                TV screens to list &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+          </span>
+        </div>
+
+        <!--<div class="input-group">
+                <span class="input-group-addon">location contact</span>
+                <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
+              </div>-->
+
+      </div>
+
+      <!--select audience category options-->
+      <div class="section">
+
+        <div class="heading">
+          Select atmost 3 common audiences:
+        </div>
+        <hr/>
+        <span formArrayName="audienceTypes" class="checkboxes">
+            <label *ngFor = "let audienceControl of audienceTypes.controls; let i=index" [formGroupName]="i" for="audiences">
+                <input formControlName="checked" type="checkbox" name="audiences">
+                {{audienceOptions[i].value}}
+              </label>
+            <!--  
+              <label *ngFor="let option of audienceOptions" for="audiences">
+                    <input formControlName="audienceTypes" type="checkbox" name="audiences" [value]="option.checked" >
+                    {{option.value}}
+              </label> 
+            -->
+        </span>
+      </div>
+
+      <!--select location category options-->
+      <div class="section">
+        <div class="heading">Select atmost 2 services you provide to your audience:</div>
+        <hr/>
+        <span formArrayName="locationServices" class="checkboxes">
+          <label *ngFor = "let locationControl of locationServices.controls; let i=index" [formGroupName]="i" for="locations">
+            <input formControlName="checked" type="checkbox" name="locations">
+            {{locationServiceOptions[i].value}}
+          </label>
+        </span>
+      </div>
+
+      <div class="btn-section">
+        <hr/>
+        <span><a href="#" >cancel</a></span>
+        <button type="submit" [disabled]="!createLocationForm.valid" class="btn btn-success form-control">add location</button>
+      </div>
+
+      <!--
+      <br/><br/>
+      <pre>
+        TO DO: Remove after:
+        <br/>
+        Form status: <strong> {{createLocationForm.status | json}} </strong>
+        Form output: 
+        <code>
+        {{createLocationForm.value | json}} 
+        </code>
+      </pre>
+    -->
+
+    </form>
+
+
+
+  </div>
+</div>

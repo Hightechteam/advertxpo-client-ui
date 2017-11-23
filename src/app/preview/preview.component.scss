@@ -1,0 +1,237 @@
+$video_without_text_height: 190px;
+$video_with_text_height: 150px;
+$screen-text-height: 40px;
+$black:#000;
+$white:#fff;
+
+.txt-summary{
+    font-size: .9em;
+
+    label{
+        font-weight: bold;
+        margin: 0;
+        display: block;
+    }
+    span.label{
+        display: inline-block;
+        background: chartreuse;
+        padding: .2em .4em;
+        margin: 4px;
+        border-radius: 2px;
+    }
+    h5{
+        font-size: .9em;
+        font-weight: bold;
+        margin: 0;
+        margin-top: .2em;
+    }
+    ul{
+        list-style-type: square;
+        padding: 0;
+        margin: 0 2em;
+
+        li{
+            font-size: .9em;
+        }
+    }
+}
+
+.form-errors{
+    font-size: .8em;
+    margin-top: 1em;
+    //background-color: antiquewhite;
+    background-color:#ffe6e2;
+    color: rgba(255, 0, 0, 0.7);
+    padding: 1em;
+
+    .close-btn{
+        float: right;
+        display: inline-block;
+        background-color: rgba(59, 59, 59, 0.7);
+        border-radius: 3px;
+        padding: 0 .5em;
+        cursor: pointer;
+        color: #fff;
+        line-height: 18px;
+        font-size: 0.9em;
+    }
+    h6{
+        font-size: 1em;
+        font-weight: bold;
+        color: red;
+        margin-bottom: 0;
+    }
+
+    a{
+        color: #0275d8;
+        display: block;
+        padding: 1em 0;
+        font-size: 1.1em;
+        cursor: pointer;
+    }
+}
+
+
+
+.full-screen-layout-preview{
+    border: 2px solid #000;
+
+    img{
+        max-height: $video_without_text_height;
+    }
+
+    margin: 1em 0;
+
+    .video-area{
+        background: lawngreen;
+        height: $video_without_text_height;
+        overflow: hidden;
+    }
+}
+
+.three-split-screen-layout-preview{
+    margin: 1em 0;
+    border: 1px solid #000;
+    
+    .row, .col{
+        margin: 0;
+        padding: 0;
+    }
+    .video-area{
+        background-image:url("../../assets/flavia.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        height: $video_with_text_height;
+    }
+
+    .advert-img-area{
+        //background: lawngreen;
+        background:#bdc8ea;
+        /*background-color:#dadada;*/
+        content:"Your image/video ad here";
+        height: $video_with_text_height;
+        line-height: $video_with_text_height;
+        overflow: hidden;
+        position:relative;
+        text-align:center;
+        border-left:1px solid #c7c7c7;
+
+        .ad-image {
+            margin: 0 auto;
+            vertical-align:middle;
+            text-align:center;
+            display: inline-block;
+            line-height: normal;
+        }
+    }
+
+    .advert-text-area{
+        padding: .5em;
+        background: $black;
+        height: $screen-text-height;
+        font-size: .9em;
+        color:$white;
+
+        
+    }
+
+}
+
+.two-split-screen-layout-preview{
+    border: 2px solid #000;
+    margin: 1em 0;
+
+    .row, .col{
+        margin: 0;
+        padding: 0;
+    }
+    .video-area{
+        background: lightskyblue;
+        height: $video_without_text_height;
+    }
+
+    .advert-img-area{
+        background: lawngreen;
+        height: $video_without_text_height;
+        overflow: hidden;
+    }
+}
+
+.text-only-screen-layout-preview{
+    border: 2px solid $black;
+    margin: 1em 0;
+
+    .video-area{
+        background: lightskyblue;
+        height: $video_with_text_height;
+    }
+
+   .advert-text-area{
+        padding: .5em;
+        background: $black;
+        height: $screen-text-height;
+        font-size: .9em;
+        color:$white;
+    }
+}
+
+.reach-cost-preview{
+    font-size: .9em;
+
+    .value{
+        font-weight: bold;
+    }
+}
+
+.estimation-bar{
+    height: 5px;
+    margin-bottom: 1px;
+}
+
+
+.review-info-window{
+    font-size: .8em;
+
+    h5{
+        font-weight: bold;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .section{
+
+        ul{
+
+            li{
+                margin: 0;
+                line-height: 16px;
+            }
+        }
+
+        .time-slot-title{
+            font-weight: bold;
+        }
+
+        .time-slot-days-list{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li{
+                display: inline-block;
+                margin: .3em;
+                border-bottom: 2px solid #f90;;
+            }
+        }
+    }
+}
+
+.error-details{
+    font-size: .9em;
+
+    h6{
+        font-size: 1em;
+        font-weight: bold;
+        color: #f00;
+    }
+}

@@ -1,0 +1,22 @@
+<div>
+  <h2>Checkbox Group Example</h2>
+</div>
+
+<form [formGroup]="heroForm" novalidate>
+
+  <div class="form-group">
+    <label class="center-block">Name:
+          <input class="form-control" formControlName="name">
+        </label>
+  </div>
+
+  <div formArrayName="countries" class="well well-lg">
+    <div *ngFor="let country of countries.controls; let i=index" [formGroupName]="i">
+      <div *ngFor="let key of country.controls | mapToKeys">
+        <input type="checkbox" formControlName="{{key.key}}">{{key.key}}
+      </div>
+    </div>
+  </div>
+</form>
+
+<p>heroForm value: {{ heroForm.value | json}}</p>

@@ -1,0 +1,417 @@
+<div class="card" id="schedule_info_card">
+
+  <div class="card-title">
+    <h5>Schedule Advert <span class="step-description float-right">STEP 3 of 4</span></h5>
+    <span>When do you want this advert to play?</span>
+  </div>
+
+  <div class="schedule-fields" [hidden]="loadingDone()">
+    <div class="error-message" *ngIf="!schedule_info.isScheduleTypeSelected">
+      Please provide the advert schedule info
+    </div>
+
+    <div class="card-content">
+      <div class="form-group">
+        <div class="layout-btns">
+          <div class="layout-btn">
+            <input type="radio" name="schedule_btn" id="schedule_btn-instant" value="1" [(ngModel)]="schedule_info.schedule_type" (click)="playNowClicked()"
+              (change)="schedule_info.validateScheduleType()">
+            <label for="schedule_btn-instant"> Play now </label>
+            <div class="help-text">
+              instant adverts are reviewed and played within 10-20minutes
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="layout-btns">
+
+          <div class="layout-btn">
+            <input type="radio" name="schedule_btn" id="schedule_btn-later" value="2" [(ngModel)]="schedule_info.schedule_type" (click)="playLaterSelected()"
+              (change)="schedule_info.validateScheduleType();">
+            <label for="schedule_btn-later"> Schedule advert </label>
+            <div class="help-text">
+              fine-tune when and how often your advert plays
+            </div>
+            <div class="card schedule-ad-card" *ngIf="schedule_info.sheduleLaterSelected()">
+              <div class="row schedule-date-select-fields">
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="date-label" for="schedule-start-date">Start date</label>
+                    <my-date-picker [options]="myDatePickerOptions" id="schedule-start-date" name="ad_start_date" [(ngModel)]="schedule_info.default_start_date"
+                      (dateChanged)="validateStartDate($event)"></my-date-picker>
+
+                  </div>
+                  <div class="error-message" *ngIf="!isStartDateValid">
+                    Start date is invalid. Please select today or a later date
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="date-label" for="schedule-end-date">End date </label>
+
+                    <my-date-picker [options]="myDatePickerOptions" id="schedule-end-date" name="ad_end_date" [(ngModel)]="schedule_info.default_end_date"
+                      (dateChanged)="validateEndDate($event)"></my-date-picker>
+
+                    <!--<input type="text" name="ad_end_date"
+                            id="schedule-end-date" class="datepicker"
+                            [(ngModel)] = "schedule_info.end_date"
+                            (change) = "validateEndDate();">-->
+                  </div>
+                  <div class="error-message" *ngIf="!isEndDateValid">
+                    End date is invalid. Please select a date later than today.
+                  </div>
+                </div>
+
+                <div class="error-message" *ngIf="!isStartDateBeforeEndDate()">
+                  End date must be later than start date.
+                </div>
+
+              </div>
+
+
+              <label>Select Time slot</label>
+
+              <div class="error-message" *ngIf="schedule_info.timeSlotHasError">
+                Please select atleast one time slot.
+              </div>
+
+
+
+              <div class="row">
+
+                <div class="col col-md-4 col-sm-4">
+
+                    <div class="layout-btns">
+                        <div class="layout-btn">
+                          <input type="checkbox" id="timeslot_btn_prime" value="1" [(ngModel)]="schedule_info.prime_time_selected" (change)="timeSlotFieldChanged()">
+                          <label for="timeslot_btn_prime" class="non-bold-label"> Prime time <span style="color:#e4ab69;font-weight:lighter;">(best*)</span> </label>
+                          <div class="help-text">
+                            8:00pm - 10:59pm
+                          </div>
+                          <div *ngIf="schedule_info.prime_time_selected">
+                            <button class="btn-link" (click)="togglePrimeTimeAdvancedSettings()">Show advanced settings</button>
+    
+                            <div class="schedule-advanced-settings prime-advanced-settings">
+                              <div class="form-group">
+    
+                                <div class="field">
+                                  <label for="">Frequency</label><br />
+                                  <div class="help-text">Number of times ad will play in this slot</div>
+                                  <select name="prime-days" [(ngModel)]="schedule_info.prime_time_frequency">
+                                      <option value="-1"> Select Freq.</option>
+                                      <option value="1">1x</option>
+                                      <option value="2">2x</option>
+                                      <option value="3">3x</option>
+                                      <option value="4">4x</option>
+                                      <option value="5">5x</option>
+                                    </select>
+                                </div>
+    
+                                <div class="field">
+                                  <label for="">Prefered time</label><br />
+                                  <select class="" [(ngModel)]="schedule_info.prime_time_prefered_time">
+                                      <option value="-1"> Select time</option>
+                                      <option value="20">8pm</option>
+                                      <option value="21">9pm</option>
+                                      <option value="22">10pm</option>
+                                    </select>
+                                </div>
+    
+                                <div class="field">
+                                    <label for="">Preferred days</label> <br />
+                                    <!--<div class="help-text">Select days to play ad</div>-->
+                                  <ss-multiselect-dropdown [options]="daysSelectOptions" [texts]="daysSelectTexts" [settings]="daysSelectSettings" [(ngModel)]="schedule_info.prime_time_days">
+    
+                                  </ss-multiselect-dropdown>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  <div class="layout-btns">
+                    <div class="layout-btn">
+                      <input type="checkbox" id="timeslot_btn_rush_hour" value="2" [(ngModel)]="schedule_info.rush_hour_selected" (change)="timeSlotFieldChanged()">
+                      <label for="timeslot_btn_rush_hour" class="non-bold-label">Rush hour </label>
+                      <div class="help-text">
+                        5:00pm - 7:59pm
+                      </div>
+                      <div *ngIf="schedule_info.rush_hour_selected">
+                        <button class="btn-link" (click)="toggleRushHourAdvancedSettings()">Show advanced settings</button>
+
+                        <div class="schedule-advanced-settings rush-hour-advanced-settings">
+                          <div class="form-group">
+
+                            <div class="field">
+                              <label for="">Frequency</label><br />
+                              <div class="help-text">Number of times ad will play in this slot</div>
+                              <select [(ngModel)]="schedule_info.rush_hour_frequency">
+                                  <option value="-1"> Select Freq.</option>
+                                  <option value="1">1x</option>
+                                  <option value="2">2x</option>
+                                  <option value="3">3x</option>
+                                  <option value="4">4x</option>
+                                  <option value="5">5x</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                              <label for="">Prefered time</label><br />
+                              <select name="" id="" class="" [(ngModel)]="schedule_info.rush_hour_prefered_time">
+                                  <option value="-1"> Select time</option>
+                                  <option value="17">5pm</option>
+                                  <option value="18">6pm</option>
+                                  <option value="19">7pm</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="">Preferred days</label> <br />
+                                <!--<div class="help-text">Select days to play ad</div>-->
+                              <ss-multiselect-dropdown [options]="daysSelectOptions" [texts]="daysSelectTexts" [settings]="daysSelectSettings" [(ngModel)]="schedule_info.rush_hour_days">
+
+                              </ss-multiselect-dropdown>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                </div>
+
+
+                <div class="col col-md-4 col-sm-4">
+                  <div class="layout-btns">
+                    <div class="layout-btn">
+                      <input type="checkbox" id="timeslot_btn_early" value="3" [(ngModel)]="schedule_info.early_bird_selected" (change)="timeSlotFieldChanged()">
+                      <label for="timeslot_btn_early" class="non-bold-label"> Early Bird </label>
+                      <div class="help-text">
+                        6:00am - 11:59am
+                      </div>
+                      <div *ngIf="schedule_info.early_bird_selected">
+
+                        <button class="btn-link" (click)="toggleEarlyBirdTimeAdvancedSettings()">Show advanced settings</button>
+
+                        <div class="schedule-advanced-settings early-bird-advanced-settings">
+                          <div class="form-group">
+
+                            <div class="field">
+                              <label for="">Frequency</label><br />
+                              <div class="help-text">Number of times ad will play in this slot</div>
+                              <select [(ngModel)]="schedule_info.early_bird_frequency">
+                                  <option value="-1"> Select Freq.</option>
+                                  <option value="1">1x</option>
+                                  <option value="2">2x</option>
+                                  <option value="3">3x</option>
+                                  <option value="4">4x</option>
+                                  <option value="5">5x</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                              <label for="">Prefered time</label><br />
+                              <select [(ngModel)]="schedule_info.early_bird_prefered_time">
+                                  <option value="-1"> Select time</option>
+                                  <option value="6">6am</option>
+                                  <option value="7">7am</option>
+                                  <option value="8">8am</option>
+                                  <option value="9">9am</option>
+                                  <option value="10">10am</option>
+                                  <option value="11">11am</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="">Preferred days</label> <br />
+                                <!--<div class="help-text">Select days to play ad</div>-->
+                              <ss-multiselect-dropdown [options]="daysSelectOptions" [texts]="daysSelectTexts" [settings]="daysSelectSettings" [(ngModel)]="schedule_info.early_bird_days">
+                              </ss-multiselect-dropdown>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="layout-btns">
+                    <div class="layout-btn">
+                      <input type="checkbox" id="timeslot_btn_lunch_hour" value="4" [(ngModel)]="schedule_info.lunch_hour_selected" (change)="timeSlotFieldChanged()">
+                      <label for="timeslot_btn_lunch_hour" class="non-bold-label"> Lunch Hour </label>
+                      <div class="help-text">
+                        12:00pm - 16:59pm
+                      </div>
+                      <div *ngIf="schedule_info.lunch_hour_selected">
+
+                        <button class="btn-link" (click)="toggleLunchHourAdvancedSettings()">Show advanced settings</button>
+
+                        <div class="schedule-advanced-settings lunch-hour-advanced-settings">
+                          <div class="form-group">
+
+                            <div class="field">
+                              <label for="">Frequency</label><br />
+                              <div class="help-text">Number of times ad will play in this slot</div>
+                              <select [(ngModel)]="schedule_info.lunch_hour_frequency">
+                                  <option value="-1"> Select Freq.</option>
+                                  <option value="1">1x</option>
+                                  <option value="2">2x</option>
+                                  <option value="3">3x</option>
+                                  <option value="4">4x</option>
+                                  <option value="5">5x</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                              <label for="">Prefered time</label><br />
+                              <select [(ngModel)]="schedule_info.lunch_hour_prefered_time">
+                                  <option value="-1"> Select time</option>
+                                  <option value="12">12pm</option>
+                                  <option value="13">1pm</option>
+                                  <option value="14">2pm</option>
+                                  <option value="15">3pm</option>
+                                  <option value="16">4pm</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="">Preferred days</label> <br />
+                                <!--<div class="help-text">Select days to play ad</div>-->
+                              <ss-multiselect-dropdown [options]="daysSelectOptions" [texts]="daysSelectTexts" [settings]="daysSelectSettings" [(ngModel)]="schedule_info.lunch_hour_days">
+                              </ss-multiselect-dropdown>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col col-md-4 col-sm-4">
+                  <div class="layout-btns">
+                    <div class="layout-btn">
+                      <input type="checkbox" id="timeslot_btn_late_night" value="5" [(ngModel)]="schedule_info.late_night_selected" (change)="timeSlotFieldChanged()">
+                      <label for="timeslot_btn_late_night" class="non-bold-label"> Late night </label>
+                      <div class="help-text">
+                        11:00pm - 03:59am
+                      </div>
+                      <div *ngIf="schedule_info.late_night_selected">
+
+                        <button class="btn-link" (click)="toggleLateNightAdvancedSettings()">Show advanced settings</button>
+
+                        <div class="schedule-advanced-settings late-night-advanced-settings">
+                          <div class="form-group">
+
+                            <div class="field">
+                              <label for="">Frequency</label><br />
+                              <div class="help-text">Number of times ad will play in this slot</div>
+                              <select [(ngModel)]="schedule_info.late_night_frequency">
+                                  <option value="-1"> Select Freq.</option>
+                                  <option value="1">1x</option>
+                                  <option value="2">2x</option>
+                                  <option value="3">3x</option>
+                                  <option value="4">4x</option>
+                                  <option value="5">5x</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                              <label for="">Prefered time</label><br />
+                              <select [(ngModel)]="schedule_info.late_night_prefered_time">
+                                  <option value="-1"> Select time</option>
+                                  <option value="23">11pm</option>
+                                  <option value="00">12am</option>
+                                  <option value="1">1am</option>
+                                  <option value="2">2am</option>
+                                  <option value="3">3am</option>
+                                  <option value="4">4am</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="">Preferred days</label> <br />
+                                <!--<div class="help-text">Select days to play ad</div>-->
+                              <ss-multiselect-dropdown [options]="daysSelectOptions" [texts]="daysSelectTexts" [settings]="daysSelectSettings" [(ngModel)]="schedule_info.late_night_days">
+                              </ss-multiselect-dropdown>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="layout-btns">
+                    <div class="layout-btn">
+                      <input type="checkbox" id="timeslot_btn_freebie" value="6" [(ngModel)]="schedule_info.freebie_selected" (change)="timeSlotFieldChanged()">
+                      <label for="timeslot_btn_freebie" class="non-bold-label">Freebie</label>
+                      <div class="help-text">
+                        Free ads (04:00am - 5:59am)
+                      </div>
+                      <div *ngIf="schedule_info.freebie_selected">
+
+                        <button class="btn-link" (click)="toggleFreebieAdvancedSettings()">Show advanced settings</button>
+
+                        <div class="schedule-advanced-settings freebie-advanced-settings">
+                          <div class="form-group">
+
+                            <div class="field">
+                              <label for="">Frequency</label><br />
+                              <div class="help-text">Number of times ad will play in this slot</div>
+                              <select [(ngModel)]="schedule_info.freebie_frequency">
+                                  <option value="-1"> Select Freq.</option>
+                                  <option value="1">1x</option>
+                                  <option value="2">2x</option>
+                                  <option value="3">3x</option>
+                                  <option value="4">4x</option>
+                                  <option value="5">5x</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                              <label for="">Preferred time</label><br />
+                              <select [(ngModel)]="schedule_info.freebie_prefered_time">
+                                  <option value="-1"> Select time </option>
+                                  <option value="4">4am</option>
+                                  <option value="5">5am</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                              <label for="">Preferred days</label> <br />
+                              <!--<div class="help-text">Select days to play ad</div>-->
+                              <ss-multiselect-dropdown [options]="daysSelectOptions" [texts]="daysSelectTexts" [settings]="daysSelectSettings" [(ngModel)]="schedule_info.freebie_days">
+                              </ss-multiselect-dropdown>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="loading-wrapper" [hidden]="!loadingDone()">
+    <div class="fa fa-circle-o-notch fast-spin"></div>
+  </div>
+
+</div>

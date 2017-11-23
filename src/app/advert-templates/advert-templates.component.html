@@ -1,0 +1,41 @@
+<div id="advert-templates">
+  <div class="container">
+    <h4>Select template</h4>
+
+    <div class="card">
+      <div class="advert-templates-table">
+        <div class="templates-list">
+          <div class="row">
+            <div class="col col-md-4 col-sm-6" *ngFor="let template of templates">
+              <div class="template-item">
+                <div class="template-thumb">
+                    <a [routerLink]="['/edit_advert', template.campaign_id]" routerLinkActive="active">
+                        <img src="tv.png" class="img-responsive">
+                    </a>
+                </div>
+                <div class="template-fields">
+                  <div class="campaign-name">
+                    <a [routerLink]="['/edit_advert', template.campaign_id]" routerLinkActive="active">
+                                    {{ template.campaign_name }}
+                    </a>
+                  </div>
+                  <div class="layout_cost">Minimum cost: {{ template.layout_cost }} /=</div>
+                  <div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="loading-wrapper" *ngIf="templates_loading">
+          <div class="fa fa-circle-o-notch fast-spin"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Guest modal -->
+<app-new-advert-modal></app-new-advert-modal>

@@ -1,0 +1,80 @@
+<nav id="navig-bar" class="navbar navbar-default navbar-fixed-top">
+
+  <div class="top-strip"></div>
+  <div class="container">
+
+    <!-- mobile menu bars -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+      <a class="navbar-brand" routerLink="/home">
+          <img src="../../assets/logo.png" alt="advertXpo logo" title="advertXpo home">
+      </a>
+    </div>
+
+    <!-- big screen menu bars -->
+    <div id="navbar" class="navbar-collapse collapse" (click)="closeMenu()">
+      <ul class="nav navbar-nav navbar-right">
+        
+        <li id="contact-no">
+          <a href="#" class="inactive"><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;(256) 774-983602</a>
+        </li>
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ADVERTISE<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/newadvert" routerLinkActive="active">New advert</a></li>
+            <li><a routerLink="/advert_templates" routerLinkActive="active">New advert using template</a></li>
+          </ul>
+        </li>
+
+        <li *ngIf="isUserLoggedIn()" routerLinkActive="active"><a routerLink="/create_location" >ADD A LOCATION</a></li>
+
+        <!--<li>
+            <a href="#">LOCATIONS</a>
+        </li>-->
+        
+        <li routerLinkActive="active">
+          <a routerLink="/faqs" >FAQs</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="/contact" >CONTACT</a>
+        </li>
+        
+        <li class="dropdown" *ngIf="isUserLoggedIn()">
+          <a href="#" class="dropdown-toggle last-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ getCurrentUserName() }} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+
+            <!--<li><a routerLink="/manage_location" routerLinkActive="active">Manage locations</a></li>
+            <li><a routerLink="/manage_account" routerLinkActive="active">Manage Account</a></li>-->
+
+            <li><a routerLink="/create_location" routerLinkActive="active">Sign up a location</a></li>
+            <li><a routerLink="/newadvert" routerLinkActive="active">Advertise now</a></li>
+            <li><a routerLink="/manage_adverts" routerLinkActive="active">Manage adverts</a></li>
+
+
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="inactive">Live chat</a></li>
+            <li *ngIf="isUserLoggedIn()"><a href="javascript:void(0)" (click)="signOutClicked()">Sign out</a></li>
+          </ul>
+        </li>
+
+        <li *ngIf="!isUserLoggedIn()" routerLinkActive="active">
+          <a routerLink="/signup">SIGN UP</a>
+        </li>
+
+        <li *ngIf="!isUserLoggedIn()" routerLinkActive="active">
+          <a routerLink="/login" class="last-link">LOGIN</a>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+
+</nav>

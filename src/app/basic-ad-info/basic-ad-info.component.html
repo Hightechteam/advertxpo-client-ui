@@ -1,0 +1,243 @@
+<div class="card" id="basic_info_card">
+
+  <div class="card-title">
+    <h5>Basic info <span class="step-description float-right">STEP 1 of 4</span></h5>
+  </div>
+
+  <div class="card-contents">
+
+    <div class="basic-info-fields" [hidden]="loadingDone()">
+      <div class="form-group">
+        <label>
+            Please provide a Campaign name <app-tooltip message="Your advert will be saved under the campaign name you provide."></app-tooltip>
+        </label><br />
+        <input type="text" [(ngModel)]="ad_basic_info.campaign_name" (keyup)="campaignNameChanged()" placeholder="campaign name" class="form-control custom-input">
+        <div class="error-message" *ngIf="ad_basic_info.campaignNameHasError">
+          Campaign name is invalid or missing
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div><label>Select advert length <app-tooltip message="The duration of the advert. "></app-tooltip></label></div>
+        <div class="error-message" *ngIf="ad_basic_info.advertlengthHasError">
+          Please select advert length
+        </div>
+        <div class="advert-length-buttons">
+          <span>
+              <input [checked]=true type="radio" name="advert_length" value="60"
+              id="one-minute-btn" 
+              [(ngModel)] = "ad_basic_info.advert_length"
+              (click) = "advertLength_60_selected()">
+              <label for="one-minute-btn">standard (1minute)</label>
+          </span>
+          <span>
+              <input [disabled]=true type="radio" name="advert_length" value="30"
+              id="thirty-sec-btn"
+              (click) = "advertLength_30_selected()" > 
+              <label for="thirty-sec-btn"><span class="disabled">short (30sec)</span></label>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Select layout <app-tooltip message="The layout determines the requirements and the cost of your advert "></app-tooltip></label>
+        <div class="error-message" *ngIf="!ad_basic_info.isLayoutSelected">
+          Please select a layout
+        </div>
+        <div class="layout-btns">
+
+
+          <div class="layout-btn">
+            <input type="radio" name="layout_type" id="btn-3-split-screen" [(ngModel)]="ad_basic_info.layout_type" value="3SPLIT" (click)="threeSplitScreenSelected()">
+            <label for="btn-3-split-screen">3-Screen split</label>
+            <div class="help-text">
+              Your advert image(s)/video will display on the side of the screen, the text will scroll at the bottom
+            </div>
+          </div>
+
+          <div class="layout-btn">
+            <input type="radio" name="layout_type" id="btn-text-split-screen" [(ngModel)]="ad_basic_info.layout_type" value="TEXT" (click)="textOnlySelected()">
+            <label for="btn-text-split-screen">Text only </label>
+            <div class="help-text">
+              This layout accepts only text adverts, they will display scrolling at the screen bottom
+            </div>
+          </div>
+
+          <!--<div class="layout-btn">
+            <input type="radio" name="layout_type" id="btn-2-split-screen" [(ngModel)]="ad_basic_info.layout_type" value="2SPLIT" (click)="twoSplitScreenSelected()">
+            <label for="btn-2-split-screen">2-Screen split </label>
+            <div class="help-text">
+              This layout requires a video or image that will be displayed alongside the main video
+            </div>
+          </div>-->
+
+          <div class="layout-btn">
+            <input [disabled]=true type="radio" name="layout_type" id="btn-full-screen" [(ngModel)]="ad_basic_info.layout_type" value="FULLSCREEN" (click)="fullScreenSelected()">
+            <label for="btn-full-screen"><span class="disabled">Full Screen </span></label>
+            <div class="help-text">
+              Your advert image(s)/video will take up the entire screen. Please upload high res. media
+            </div>
+          </div>
+
+        </div>
+
+        <div *ngIf="ad_basic_info.hasImageOrVideoResorce()">
+          <label class="label">Upload Images or video</label>
+          <div class="image-video-select-option">
+            <div class="row">
+              <div class="col-xs-6 no-padding">
+                <button class="btn-link" (click)="selectedImagesUploadType()" [class.selected]="imagesUploadTypeSelected()">Images</button>
+              </div>
+              <div class="col-xs-6 no-padding">
+                <!-- TO DO: uncomment when video uploads are allowed
+                  <button class="btn-link" (click)="selectedVideoUploadType()" [class.selected]="videoUploadTypeSelected()">Video</button>
+                -->
+                <button class="btn-link disabled" disabled=true (click)="selectedVideoUploadType()" [class.selected]="videoUploadTypeSelected()">Video</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-resource-uploads" *ngIf="ad_basic_info.hasImageOrVideoResorce() && imagesUploadTypeSelected()">
+
+          <h3>Advert images</h3>
+          <div class="error-message" *ngIf="ad_basic_info.advertImagesHaveError">
+            {{ ad_basic_info.advertImagesErrorMessage }}
+          </div>
+
+          <div class="img-preview">
+            <!-- *ngIf="ad_basic_info.image_preview_url"-->
+            <div class="img-preview-thumbs" *ngFor="let image of ad_basic_info.selected_images">
+              <a class="remove-img-btn" (click)="removeImage(image)" alt="remove image" title="remove image"> &nbsp; &times; &nbsp;</a>
+              <img [src]="image.url" class="img-responsive" (click)="updateImagePreviewUrl(image)" />
+            </div>
+            <div class="img-preview-thumbs" *ngIf="isImageUploadInProgress">
+              <img src="../../assets/loading.gif" class="img-responsive" />
+            </div>
+
+          </div>
+
+          <div class="img-upload-field">
+            <label for="image-uploads" class="btn-custom" [class.disabled]="isImageUploadInProgress || maxImagesReached()">Upload images</label>
+            <input type="file" (change)="fileChange($event)" multiple placeholder="Upload file" accept="jpeg,.jpg,.png,.gif" id="image-uploads"
+              [disabled]="isImageUploadInProgress || maxImagesReached()">
+
+  <!--TO DO: Uncomment after sorting browse library functionality
+    <button href="#" class="browse-images-btn" [class.disabled]="maxImagesReached()" [disabled]="maxImagesReached()" data-toggle="modal"
+              data-target="#myModal">Browse Library</button>
+            -->
+              <button href="#" class="browse-images-btn" [class.disabled]="maxImagesReached()" [disabled]=true style="cursor:not-allowed;" data-toggle="modal"
+              data-target="#myModal">Browse Library</button>
+
+            <div class="help-text">
+              maximum 3 images. Supported formats: .jpg, .png, .gif
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade library-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Select Image</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="search-box">
+                    <input type="text" class="lib-search" placeholder="Search images">
+                  </div>
+                  <ul>
+                    <li *ngFor="let image of server_images">
+                      <img [src]="image.url" (click)="updatedSelectedImages(image)" [class.selected]="isImageSelected(image)">
+                    </li>
+                    <div class="clear-fix"></div>
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" (click)="useSelectedImage()">Use selected images</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end modal -->
+
+        </div>
+
+        <div class="image-resource-uploads" *ngIf="ad_basic_info.hasImageOrVideoResorce() && videoUploadTypeSelected()">
+
+          <h3>Advert Video</h3>
+          <div class="error-message" *ngIf="ad_basic_info.videoHasError">
+            Please upload video
+          </div>
+
+          <div class="video-loading-progress" *ngIf="isVideoUploadInProgress">
+            <div class="row">
+              <div class="col-md-6">
+                <span>uploading video</span>
+                <img src="../../assets/loading.gif" class="img-responsive" />
+              </div>
+              <div class="col-md-6">
+              </div>
+            </div>
+          </div>
+
+          <div class="video-thumb" *ngIf="ad_basic_info.video_thumb_url">
+            <div class="row">
+              <div class="col-md-4">
+                <img [src]="ad_basic_info.video_thumb_url" class="img-responsive">
+              </div>
+              <div class="col-md-4">
+                <button class="btn-link" (click)="removeVideo()">Remove video</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="img-upload-field">
+            <label for="video-uploads" class="btn-custom" [class.disabled]="isVideoUploadInProgress || ad_basic_info.video_thumb_url">Upload video</label>
+            <input type="file" (change)="uploadVideo($event)" placeholder="Upload video" accept=".mov,.mp4, .mkv" id="video-uploads"
+              [disabled]="isVideoUploadInProgress || ad_basic_info.video_thumb_url">
+
+            <div class="help-text">
+              supported formats: .mov, .mp4, .mkv
+            </div>
+
+          </div>
+        </div>
+
+        <div *ngIf="ad_basic_info.advertTextRequired()" class="">
+
+          <div class="form-group">
+            <label class="bold-label">Advert text branding: 
+              <app-tooltip message="Enter your company or product’s name and/or a contact phone number. This will be displayed as
+                  the advert title on the screen."></app-tooltip> 
+            </label>
+            <div class="help-text">
+              (maximum 25 characters).
+            </div>
+            <input type="text" [(ngModel)]="ad_basic_info.advert_title" [maxlength]="25" (keyup)="advertTitleChanged()" class="form-control custom-input">
+            <div class="error-message" *ngIf="ad_basic_info.advertTitleHasError">
+              Please provide a valid advert title
+            </div>
+          </div>
+
+
+          <label class="bold-label">Advert text message 
+            <app-tooltip message="Enter your advert message. The message will scroll on the screen"></app-tooltip> 
+          </label> <br />
+          <div class="error-message" *ngIf="ad_basic_info.advertTextHasError">
+            Please enter advert text message.
+          </div>
+          <textarea name="" id="" rows="5" class="form-control" placeholder="Enter advert message" [maxlength]="add_text_character_limit"
+            [(ngModel)]="ad_basic_info.advert_text" (keyup)="advertTextEntered()"></textarea>
+          <div class="help-text">{{ getRemainingCharcters() }} characters remaining</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="loading-wrapper" [hidden]="!loadingDone()">
+      <div class="fa fa-circle-o-notch fast-spin"></div>
+    </div>
+
+  </div>
+</div>

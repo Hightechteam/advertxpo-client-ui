@@ -1,0 +1,35 @@
+<div id="login-page">
+
+  
+  <div class="login-box form-wrapper">
+    <div class="login-wrapper">
+      <h2>
+          Login
+          <i class="fa fa-spinner fa-spin pull-right" *ngIf="loadingInProgress"></i>
+      </h2>
+ 
+      <div class="alert alert-danger" *ngIf="!success_authentication">
+        {{ login_error }}
+      </div>
+
+      <form (ngSubmit)="loginFormSubmited()"> 
+        <div class="form-group required field" class="field">
+          <label class="control-label" for="phone_number">Phone number</label>
+          <input class="form-control custom-input" type="text" [(ngModel)] = "phone_number" name="phone_number" required>
+        </div>
+        <div class="form-group required field">
+          <label class="control-label" for="password">Password</label>
+          <input class="form-control custom-input" type="password" [(ngModel)] = "password" name="password" required>
+        </div>
+        <div class="field">
+          <br />
+          <button class="btn btn-success form-control">Log in</button>
+        </div>
+      </form>
+
+      <br />
+      <a routerLink ="/signup" routerLinkActive = "active">Sign up</a>
+    </div>
+  </div>
+
+</div>

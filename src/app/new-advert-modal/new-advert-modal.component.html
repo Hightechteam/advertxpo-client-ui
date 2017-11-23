@@ -1,0 +1,28 @@
+<!-- Modal -->
+<div class="modal fade" id="guestLoginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+        <h4 class="modal-title" id="myModalLabel">Create new advert</h4>
+      </div>
+      <div class="modal-body">
+        <p style="vertical-align:middle;" class="alert alert-warning clearfix">
+          <span style="height:100%;width:15%;font-size:2em;color:#7b572d;float:left;" class="glyphicon glyphicon-exclamation-sign"></span>
+          <span style="display:block;width:80%;font-size:0.9em;float:right;padding:auto 5px;">You are currently not logged in and won't be able to track your advert once submitted.</span>
+        </p>
+        <p class="terms-and-conditions">By Clicking "Proceed" you agree to the <a routerLink="/terms" routerLinkActive="active" target="_top" style="text-decoration:underline;"
+            (click)="hideGuestModal()">terms of use</a> of advertXpo</p>
+      </div>
+      <div class="modal-footer">
+        <a routerLink="/login" routerLinkActive="active" type="button" class="btn-success btn btn-custom btn-sm" (click)="hideGuestModal()">Login</a>
+        <a routerLink="/signup" routerLinkActive="active" class="btn btn-custom btn-sm" (click)="hideGuestModal()">Sign up</a>
+        <button type="button" class="btn btn-custom btn-sm" (click)="proceedAnywayClicked()">
+          Proceed  <span class="fa fa-circle-o-notch fast-spin" *ngIf="authenticating_guest_in_progress"></span>
+      </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal -->

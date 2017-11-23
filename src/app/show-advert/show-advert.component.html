@@ -1,0 +1,383 @@
+<div class="show-advert-page">
+
+<div class="top-section">
+  <div class="container">
+     <a [routerLink] ="['/edit_advert', ad_basic_info.advert_id]" 
+        routerLinkActive = "active"
+         class="btn btn-custom" *ngIf="!is_loading_advert_info" >Duplicate and edit</a>
+
+    <div *ngIf="!is_loading_advert_info">
+      <br />
+      Advert status: {{ advert_status }}</div>
+  </div>
+ 
+</div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <div class="row">
+
+      <div *ngIf="!fetch_advert_error">
+        <div class="col-md-8">
+
+          <div class="card">
+            <div class="advert-sections" *ngIf="!is_loading_advert_info">
+
+              <div class="section">
+                <h4>Basic information</h4>
+
+                <table>
+                  <tr *ngIf="ad_basic_info.campaign_name">
+                    <td class="td-label">Campaign name:</td>
+                    <td class="td-values"> {{ ad_basic_info.campaign_name }} </td>
+                  </tr>
+
+                  <tr *ngIf="ad_basic_info.advert_length">
+                    <td class="td-label">Advert length:</td>
+                    <td class="td-values">{{ ad_basic_info.advert_length }} seconds </td>
+                  </tr>
+
+                  <tr *ngIf="ad_basic_info.layout_type">
+                    <td class="td-label">Advert layout:</td>
+                    <td class="td-values">{{ ad_basic_info.layout_type }}  </td>
+                  </tr>
+
+                  <tr *ngIf="ad_basic_info.advertTextRequired()">
+                    <td class="td-label">Advert text branding:</td>
+                    <td class="td-values">{{ ad_basic_info.advert_title }} </td>
+                  </tr>
+
+                  <tr *ngIf="ad_basic_info.advertTextRequired()">
+                    <td class="td-label">Advert text message: </td>
+                    <td class="td-values">{{ ad_basic_info.advert_text }} </td>
+                  </tr>
+
+                </table>
+
+                <div *ngIf="ad_basic_info.imageReourceTypeUsed()">
+                  <div class="image-thumbs">
+                    <h5>Images</h5>
+                    <ul class="list-unstyled">
+                      <li *ngFor="let image of ad_basic_info.selected_images">
+                        <img [src]="image.url" class="img-responsive"/>
+                      </li>
+                      <div class="clear-fix"></div>
+                    </ul>
+                  </div>
+                </div>
+
+                <div *ngIf="ad_basic_info.videoReourceTypeUsed()">
+                  <div class="image-thumbs">
+                    <h5>Video</h5>
+                    <ul class="list-unstyled">
+                      <li>
+                        <img [src] = "ad_basic_info.video_thumb_url" class="img-responsive">
+                      </li>
+                      <div class="clear-fix"></div>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section">
+                <h4>Audience</h4>
+                <div *ngIf = "targeting_info.target_specific_screen_selected">
+                  <table>
+                    <tr>
+                      <td class="td-label">Selected screens: </td>
+                      <td class="td-values">
+                        <ul>
+                          <li *ngFor="let screen of targeting_info.selected_screens">
+                            {{ screen.alias }}
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div *ngIf = "!targeting_info.target_specific_screen_selected">
+
+                  <table>
+                    <tr>
+                      <td class="td-label">Locations: </td>
+                      <td class="td-values">
+                        <ul>
+                          <div *ngIf="targeting_info.all_locations_selected">
+                              <li>All locations:</li>
+                            </div>
+                            <div *ngIf="!targeting_info.all_locations_selected">
+                              <li *ngFor="let location of targeting_info.selected_locations">
+                                  {{ location.name }} ({{ location.screen_count }} screens)
+                              </li>
+                            </div>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="td-label">Business Types:</td>
+                      <td class="td-values">
+                        <ul>
+                            <div *ngIf="targeting_info.all_business_types">
+                              <li>All business types</li>
+                            </div>
+                            <div *ngIf="!targeting_info.all_business_types">
+                              <li *ngFor="let bt of targeting_info.selected_business_types">
+                                  {{ bt.name }} ({{bt.screen_count}} screens)
+                              </li>
+                            </div>
+                          </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="td-label">
+                        Audience types:
+                      </td>
+                      <td class="td-values">
+                        <ul>
+                          <div *ngIf="targeting_info.all_audience_types">
+                            <li>All audience types</li>
+                          </div>
+                          <div *ngIf="!targeting_info.all_audience_types">
+                            <li *ngFor="let at of targeting_info.selected_audience_types">
+                                {{ at.name }} ({{at.screen_count}} screens)
+                            </li>
+                          </div>
+                        </ul>
+                      </td>
+                    </tr>
+
+                  </table>
+                </div>
+
+              </div>
+
+              <div class="section">
+                <h4>Schedule</h4>
+                <div *ngIf="!schedule_info.sheduleLaterSelected()">
+                  <li>Play now (Instant advert)</li>
+                  <li>Start date: {{ schedule_info.start_date }}</li>
+                  <li>End date: {{ schedule_info.end_date }}</li>
+                </div>
+                <div *ngIf="schedule_info.sheduleLaterSelected()">
+                  <table>
+                    <tr>
+                      <td class="td-label">Start date: </td>
+                      <td class="td-values"> {{ schedule_info.start_date }} </td>
+                    </tr>
+
+                    <tr>
+                      <td class="td-label">End date: </td>
+                      <td class="td-values"> {{ schedule_info.end_date }} </td>
+                    </tr>
+                    <tr>
+                      <td class="td-label" v-align="top">Time slots: </td>
+                      <td class="td-values">
+                        <ul>
+
+                          <div class="time-slot" *ngIf="schedule_info.rush_hour_selected">
+                            <li class="time-slot-title">Rush hour</li>
+                            <div class="time-slot-preview-advanced-fields">
+                              <div *ngIf="schedule_info.rush_hour_frequency != -1">
+                                Frequency: {{ schedule_info.rush_hour_frequency }}
+                              </div>
+                              <div *ngIf="schedule_info.rush_hour_prefered_time != -1">
+                                Prefered time: {{ schedule_info.rush_hour_prefered_time }}
+                              </div>
+                              <div *ngIf="schedule_info.rush_hour_days.length > 0">
+                                Days
+                                <ul class="time-slot-days-list">
+                                  <li *ngFor="let day of schedule_info.rush_hour_days">
+                                    {{ getDayName(day) }}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="time-slot" *ngIf="schedule_info.prime_time_selected">
+                            <li class="time-slot-title">Prime time</li>
+                            <div class="time-slot-preview-advanced-fields">
+                              <div *ngIf="schedule_info.prime_time_frequency != -1">
+                                Frequency: {{ schedule_info.prime_time_frequency }}
+                              </div>
+                              <div *ngIf="schedule_info.prime_time_prefered_time != -1">
+                                Prefered time: {{ schedule_info.prime_time_prefered_time }}
+                              </div>
+                              <div *ngIf="schedule_info.prime_time_days.length > 0">
+                                Days
+                                <ul class="time-slot-days-list">
+                                  <li *ngFor="let day of schedule_info.prime_time_days">
+                                    {{ getDayName(day) }}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="time-slot" *ngIf="schedule_info.early_bird_selected">
+                            <li class="time-slot-title">Early Bird</li>
+                            <div class="time-slot-preview-advanced-fields">
+                              <div *ngIf="schedule_info.early_bird_frequency != -1">
+                                Frequency: {{ schedule_info.early_bird_frequency }}
+                              </div>
+                              <div *ngIf="schedule_info.early_bird_prefered_time != -1">
+                                Prefered time: {{ schedule_info.early_bird_prefered_time }}
+                              </div>
+                              <div *ngIf="schedule_info.early_bird_days.length > 0">
+                                Days
+                                <ul class="time-slot-days-list">
+                                  <li *ngFor="let day of schedule_info.early_bird_days">
+                                    {{ getDayName(day) }}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="time-slot" *ngIf="schedule_info.lunch_hour_selected">
+                            <li class="time-slot-title">Lunch hour</li>
+                            <div class="time-slot-preview-advanced-fields">
+                              <div *ngIf="schedule_info.lunch_hour_frequency != -1">
+                                Frequency: {{ schedule_info.lunch_hour_frequency }}
+                              </div>
+                              <div *ngIf="schedule_info.lunch_hour_prefered_time != -1">
+                                Prefered time: {{ schedule_info.lunch_hour_prefered_time }}
+                              </div>
+                              <div *ngIf="schedule_info.lunch_hour_days.length > 0">
+                                Days
+                                <ul class="time-slot-days-list">
+                                  <li *ngFor="let day of schedule_info.lunch_hour_days">
+                                    {{ getDayName(day) }}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="time-slot" *ngIf="schedule_info.late_night_selected">
+                            <li class="time-slot-title">Late night</li>
+                            <div class="time-slot-preview-advanced-fields">
+                              <div *ngIf="schedule_info.late_night_frequency != -1">
+                                Frequency: {{ schedule_info.late_night_frequency }}
+                              </div>
+                              <div *ngIf="schedule_info.late_night_prefered_time != -1">
+                                Prefered time: {{ schedule_info.late_night_prefered_time }}
+                              </div>
+                              <div *ngIf="schedule_info.late_night_days.length > 0">
+                                Days
+                                <ul class="time-slot-days-list">
+                                  <li *ngFor="let day of schedule_info.late_night_days">
+                                    {{ getDayName(day) }}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="time-slot" *ngIf="schedule_info.freebie_selected">
+                            <li class="time-slot-title">Freebie</li>
+                            <div class="time-slot-preview-advanced-fields">
+                              <div *ngIf="schedule_info.freebie_frequency != -1">
+                                Frequency: {{ schedule_info.freebie_frequency }}
+                              </div>
+                              <div *ngIf="schedule_info.freebie_prefered_time != -1">
+                                Prefered time: {{ schedule_info.freebie_prefered_time }}
+                              </div>
+                              <div *ngIf="schedule_info.freebie_days.length > 0">
+                                Days
+                                <ul class="time-slot-days-list">
+                                  <li *ngFor="let day of schedule_info.freebie_days">
+                                    {{ getDayName(day) }}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div class="section">
+                <h4>Payment</h4>
+                
+                <table>
+                  <tr>
+                    <td class="td-label">Amount: </td>
+                    <td class="td-values">{{ amount }}/=</td>
+                  </tr>
+                  <tr>
+                    <td class="td-label">Payment method:</td>
+                    <td class="td-values">{{ getPaymentMethodName(payment_info.payment_method) }}</td>
+                  </tr>
+                  <tr *ngIf="payment_info.account_number">
+                    <td class="td-label">Account number:</td>
+                    <td class="td-values">{{ payment_info.account_number }}</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+            <div class="loading-wrapper" *ngIf="is_loading_advert_info">
+                <div class="fa fa-circle-o-notch fast-spin"></div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <div class="col-md-4" *ngIf="!is_loading_advert_info">
+
+          <div class="card card-stat">
+            <div class="display-count">
+              <div class="value center">{{ display_count }}</div>
+              <div class="f-label center">Number of times this advert has been displayed.</div>
+            </div>
+          </div>
+
+          <div class="card stat-fields card-stat">
+
+            <div class="field">
+              <div class="f-label"> Number of screens reached: </div>
+              <div class="f-value"> {{ screens_reached }}</div>
+            </div>
+
+            <div class="field">
+              <div class="f-label"> Estimated number of people reached: </div>
+              <div class="f-value"> {{ people_reached }}</div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div *ngIf="fetch_advert_error">
+        <div class="card">
+          <p class="alert alert-danger">Something went wrong. Please check your internet connection and try again</p>
+          <div class="retry-btn center">
+            <button class="btn btn-success" (click)="reloadPage()"> <span class="glyphicon glyphicon-refresh"></span> Retry</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

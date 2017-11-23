@@ -1,0 +1,63 @@
+<div class="advert-steps">
+  <div class="container">
+    <div class="row">
+      <div class="col col-xs-12">
+        <span class="step-number">1</span>
+        <span class="step-label"><a href="javascript:void(0)" (click)="scrollToBasicInfo()">Basic Info</a></span> &nbsp;
+        <span class="glyphicon glyphicon-chevron-right ico"></span> &nbsp;&nbsp;
+
+        <span class="step-number">2</span>
+        <span class="step-label"><a href="javascript:void(0)" (click)="scrollToAudienceInfo()">Audience</a></span> &nbsp;
+        <span class="glyphicon glyphicon-chevron-right ico"></span> &nbsp;&nbsp;
+
+        <span class="step-number">3</span>
+        <span class="step-label"><a href="javascript:void(0)" (click)="scrollToScheduleInfo()">Schedule</a></span> &nbsp;
+        <span class="glyphicon glyphicon-chevron-right ico"></span> &nbsp;&nbsp;
+
+        <span class="step-number">4</span>
+        <span class="step-label"><a href="javascript:void(0)" (click)="scrollToPaymentInfo()">Payment</a></span>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container root-element">
+
+  <div *ngIf="!failed_to_load_advert_form">
+    <div class="row" id="new-advert-form">
+
+      <div class="col col-md-7">
+        <app-basic-ad-info (broadCastBasicAdInfo)="updateBasicAdInfo($event)" (updateReachEstimates)="updateReachEstimates()"></app-basic-ad-info>
+        <app-targeting (broadcastTargetingInfo)="updateTargetingInfo($event)"></app-targeting>
+        <app-schedule (broadcastScheduleInfo)="updateScheduleInfo($event)"></app-schedule>
+        <app-payment (broadcastPaymentInfo)="updatePaymentInfo($event)"></app-payment>
+      </div>
+
+      <div class="col col-md-5 s-side-bar">
+        <app-preview [ad_basic_info]="ad_basic_info" [targeting_info]="targeting_info" [schedule_info]="schedule_info" [payment_info]="payment_info">
+        </app-preview>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="failed_to_load_advert_form">
+    <div class="card">
+      <p class="alert alert-danger">{{ load_adverts_error_message }}</p>
+      <div class="retry-btn center">
+        <button class="btn btn-success" (click)="reloadPage()"> <span class="glyphicon glyphicon-refresh"></span> Retry</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!--<app-advertstatus 
+    [ad_basic_info] = "ad_basic_info" 
+    *ngIf="!showNewAdvertForm()">
+  </app-advertstatus>-->
+
+</div>
+
+<!-- Guest modal -->
+<app-new-advert-modal></app-new-advert-modal>

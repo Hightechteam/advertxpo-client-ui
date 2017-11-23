@@ -1,0 +1,259 @@
+<div class="card" id="audience_info_card">
+  <div class="card-title">
+    <h5>Audience <span class="step-description  float-right">STEP 2 of 4</span></h5>
+    <span>Define who you want to see your adverts</span>
+  </div>
+
+  <div class="card-content">
+
+    <div class="targeting-fields" [hidden]="!loadingDone()">
+
+      <div>
+        <input type="checkbox"
+              id="target-specific-screens-btn"
+              [(ngModel)]="targetingInfo.target_specific_screen_selected" 
+              /> 
+        <label for="target-specific-screens-btn" class="smaller-label">
+          Target specific screens 
+          <app-tooltip message="Select this option to target specific screens or leave it blank and customize your audience "></app-tooltip>
+        </label>
+      </div>
+
+      <div id="target-specific-screens-form" [hidden]="!targetingInfo.target_specific_screen_selected">
+        Search for screen:
+        <div class="screen-codes-input">
+
+          <div id="selected_screens" *ngIf="targetingInfo.selected_screens.length > 0">
+            <h6 class="sub-title">Selected screens</h6>
+            <ul>
+              <li *ngFor="let screen of targetingInfo.selected_screens">
+                  <span class="place-name">{{ screen.alias }} </span>
+                  <span class="close-btn pull-right"> <a href="javascript:void(0)" (click)="removeSelectedScreen(screen)">&times;</a> </span>
+                  <div class="clear-fix"></div>
+              </li>
+            </ul>
+          </div>
+
+            <input type="text"
+              id="txtScreenSearchKey"
+              class="stop-event-propagation"
+              placeholder="Enter screen code or place name"
+              [(ngModel)] = "targetingInfo.target_screen_code"
+              (keyup) = "screenCodesChanged()" >
+        </div>
+        <div id="screen-codes-search-box" class="stop-event-propagation" [hidden]="hide_screen_search_box">
+          <ul>
+            <li *ngFor="let screen of targetingInfo.screens_returned_from_search_results | screenFilter:targetingInfo.target_screen_code">
+              <a href="javascript:void(0)" (click) = "screenSelectedFromSearch(screen)">
+                  {{ screen.alias }}<span class="pull-right">{{ screen.screen_code }}</span>
+              </a>
+            </li>  
+            <li class="no-results-list-item"
+              *ngIf="(targetingInfo.screens_returned_from_search_results | screenFilter:targetingInfo.target_screen_code) == 0">
+               <span class="glyphicon glyphicon-ban-circle"></span> No results for <strong>{{ targetingInfo.target_screen_code }}</strong>
+            </li>
+          </ul>
+        </div>
+      
+        <div class="error-message" *ngIf="targetingInfo.screenCodesFieldHasError" >
+          Please provide atleast one screen
+        </div>
+      </div>
+
+      <div [hidden]="targetingInfo.target_specific_screen_selected" >
+
+          <h4 class="sub-heading">Customize your audience</h4>
+
+          <div class="customise-audience-fields">
+
+            <div class="form-group">
+              <label for="location">Target area(s): </label>
+              <div class="row">
+                <div class="col-sm-8">
+                  
+                  <div class="custom-search-select-widget" [class.inactive-widget]="targetingInfo.all_locations_selected">
+                    <div class="multi-search-select-widget">
+
+                        <div class="selected-values" *ngIf="targetingInfo.selected_locations.length > 0 ">
+                          <h6 class="sub-title">Selected area(s)</h6>
+                          <ul>
+                            <li *ngFor="let location of targetingInfo.selected_locations">
+                              {{ location.name }} ( {{ location.screen_count }} screens)
+                              <a href="javascript:void(0)" class="pull-right" (click)="removeLocation(location)">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <input type="text"
+                          class="input-field stop-event-propagation"
+                          id="txtLocationSearchKey"
+                          placeholder="Select area(s)"
+                          [disabled] = "targetingInfo.all_locations_selected"
+                          (focus)="locationSearchFocus()"
+                          (keyup) = "locationSearchKeyChange()" >
+                    </div>
+                    <div id="location-results-search-box" class="results-search-box stop-event-propagation" [hidden]="hide_locations_search_box">
+                      <ul>
+                        <li *ngFor="let location of targetingInfo.locations">
+                          <a href="javascript:void(0)" (click) = "selectLocation(location)">
+                              {{ location.name }}<span class="pull-right">{{ location.screen_count }} screens</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+                
+                <div class="col-sm-4">
+                  <input type="checkbox" name="all_locations" id="all_locations" 
+                    [(ngModel)]="targetingInfo.all_locations_selected"
+                    (change) = "toggleLocationSelectField()" >
+                  <label for="all_locations" class="smaller-label">All areas 
+                    <app-tooltip message="Select this option to target all available areas"></app-tooltip>
+                  </label>
+                </div>
+              </div>
+              <div class="error-message" *ngIf="targetingInfo.locationFileHasErrors">
+                  Please select atleast one area
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label for="location">Business Type: </label>
+              <div class="row">
+                <div class="col-sm-8">
+                  
+                  <div class="custom-search-select-widget" [class.inactive-widget]="targetingInfo.all_business_types">
+                    <div class="multi-search-select-widget">
+
+                        <div class="selected-values" *ngIf="targetingInfo.selected_business_types.length >0 ">
+                           <h6 class="sub-title">Selected business types</h6>
+                          <ul>
+                            <li *ngFor="let bt of targetingInfo.selected_business_types">
+                              {{ bt.name }} ( {{ bt.screen_count }} screens)
+                              <a href="javascript:void(0)" class="pull-right" (click)="removeBusinessType(bt)">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <input type="text"
+                          class="input-field stop-event-propagation"
+                          id="txtBusinessTypeSearchKey"
+                          placeholder="Select business types"
+                          [disabled] = "targetingInfo.all_business_types"
+                          (focus)="businessTypeSearchFocus()"
+                          (keyup) = "businessTypeSearchKeyChange()" >
+                    </div>
+                    <div id="business-types-results-search-box" class="results-search-box stop-event-propagation" [hidden]="hide_business_type_seach_box">
+                      <ul>
+                        <li *ngFor="let bt of targetingInfo.business_types">
+                          <a href="javascript:void(0)" (click) = "selectBusinessType(bt)">
+                              {{ bt.name }}<span class="pull-right">{{ bt.screen_count }} screens</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+                
+                <div class="col-sm-4">
+                <input type="checkbox" name="all_business_types" id="all_business_types"
+                    [(ngModel)]="targetingInfo.all_business_types" 
+                    (change)="toggleBusinessTypesSelectField()" >
+                  <label for="all_business_types" class="smaller-label">
+                    All businesses
+                    <app-tooltip message="Select this option to target all available business types"></app-tooltip>
+                  </label>
+                </div>
+              </div>
+              <div class="error-message" *ngIf="targetingInfo.businessTypeFieldHasErrors">
+                  Please select atleast one category
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label for="location">Audience category: </label>
+              <div class="row">
+                <div class="col-sm-8">
+                  
+                  <div class="custom-search-select-widget" [class.inactive-widget]="targetingInfo.all_audience_types">
+                    <div class="multi-search-select-widget">
+
+                        <div class="selected-values" *ngIf="targetingInfo.selected_audience_types.length >0 ">
+                           <h6 class="sub-title">Selected audience categories</h6>
+                          <ul>
+                            <li *ngFor="let at of targetingInfo.selected_audience_types">
+                              {{ at.name }} ( {{ at.screen_count }} screens)
+                              <a href="javascript:void(0)" class="pull-right" (click)="removeaudienceType(at)">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <input type="text"
+                          class="input-field stop-event-propagation"
+                          id="txtAudienceTypeSearchKey"
+                          placeholder="Select audience category"
+                          [disabled] = "targetingInfo.all_audience_types"
+                          (focus) = "audienceTypeSearchFocus()"
+                          (keyup) = "audienceTypeSearchKeyChange()" >
+                    </div>
+                    <div id="audience-types-results-search-box" class="results-search-box stop-event-propagation" [hidden]="hide_audience_type_search_box">
+                      <ul>
+                        <li *ngFor="let at of targetingInfo.audience_types">
+                          <a href="javascript:void(0)" (click) = "selectaudienceType(at)">
+                              {{ at.name }}<span class="pull-right">{{ at.screen_count }} screens</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+                
+                <div class="col-sm-4">
+                <input type="checkbox" name="all_audience_types" id="all_audience_types"
+                    [(ngModel)]="targetingInfo.all_audience_types"
+                    (change)="toggleAudienceTypesSelectField()">
+                  <label for="all_audience_types" class="smaller-label">
+                    All audiences 
+                    <app-tooltip message="Select this option to target all available audiences"></app-tooltip>
+                    </label>
+                </div>
+              </div>
+              <div class="error-message" *ngIf="targetingInfo.audienceTypeFieldHasErrors">
+                  Please select atleast one category
+                </div>
+            </div>
+
+          </div>
+
+      </div>
+
+    </div>
+
+    <div class="loading-wrapper" *ngIf="!loadingDone() && !fatal_error_occured">
+      <div class="fa fa-circle-o-notch fast-spin"></div>
+    </div>
+
+    <div class="fatal-error" *ngIf="fatal_error_occured">
+
+      <p class="alert alert-danger">
+        Something went wrong. Please check your internet connection and try again.
+      </p>
+
+      <div class="retry-btn">
+        <button class="btn btn-success" (click)="reloadPage()"> <span class="glyphicon glyphicon-refresh"></span> Retry</button>
+      </div>
+
+    </div>
+  </div>
+  
+</div>

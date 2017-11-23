@@ -1,0 +1,17 @@
+{
+  "method": "CREATE_NEW_LOCATION",
+  "credentials": {
+    "app_id": "thisIsdaAppID127",
+    "api_password": "QW8YUEI90T%4#0Z",
+    "token_id": ""
+  },
+  "params": {
+    "location_info": {
+      "phone_contact": "0779909090",
+      "business_name": "advertXpo",
+      "screens": "7"
+    }
+  },
+  "audience_types": [2, 6],
+  "location_services": [7]
+}
